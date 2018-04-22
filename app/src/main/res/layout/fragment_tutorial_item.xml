@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="@dimen/tutorial_image_size"
+            android:layout_height="@dimen/tutorial_image_size"
+            android:id="@+id/tutorial_imageview"
+            android:layout_marginTop="@dimen/tutorial_image_margin_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tutorial_title_textview"
+            tools:text="dandasm"
+            android:textSize="30sp"
+            android:layout_marginTop="30dp"
+            style="@style/tutorialText"
+            app:layout_constraintTop_toBottomOf="@id/tutorial_imageview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tutorial_description_textview"
+            tools:text="daasd oasiod asmoi dmasoim adsoim doiasm odiasmoid masoidm asoimd asoimd asoimd asoimd ioasndasm"
+            android:textSize="16sp"
+            android:layout_marginTop="25dp"
+            style="@style/tutorialText"
+            app:layout_constraintTop_toBottomOf="@id/tutorial_title_textview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/skip_tutorial_button"
+            android:text="@string/skip"
+            style="@style/PrimaryColorButton"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

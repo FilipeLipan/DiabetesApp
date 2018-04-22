@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tutorial_image_size">120dp</dimen>
+    <dimen name="tutorial_image_margin_top">90dp</dimen>
+
+    <dimen name="small_horizontal_margin">8dp</dimen>
+    <dimen name="medium_horizontal_margin">12dp</dimen>
+    <dimen name="heavy_horizontal_margin">16dp</dimen>
+
+    <dimen name="small_vertical_margin">8dp</dimen>
+    <dimen name="medium_vertical_margin">12dp</dimen>
+    <dimen name="heavy_vertical_margin">16dp</dimen>
+
+    <!-- Default inner padding within buttons -->
+    <dimen name="button_padding_vertical_material">8dp</dimen>
+    <dimen name="button_padding_horizontal_material">8dp</dimen>
+    <dimen name="button_corner">30dp</dimen>
+    <dimen name="control_corner_material">0dp</dimen>
+
+
+</resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "568639570309",
+    "firebase_url": "https://appdiabetes-915c1.firebaseio.com",
+    "project_id": "appdiabetes-915c1",
+    "storage_bucket": "appdiabetes-915c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568639570309:android:726cae7846ad4a55",
+        "android_client_info": {
+          "package_name": "com.utfpr.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568639570309-mf2onrlgghfpedgh6oebbc63jctit8gk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.utfpr.myapplication",
+            "certificate_hash": "8cb9f1d662b8742d3475bfa61d0dd60bb4c0006b"
+          }
+        },
+        {
+          "client_id": "568639570309-mt3cbhff3g2375b59bb91bv94jfb0el2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRQp28pZ3Hm_bSRDWmzEjQPxmiE2qi1zc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568639570309-mt3cbhff3g2375b59bb91bv94jfb0el2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
