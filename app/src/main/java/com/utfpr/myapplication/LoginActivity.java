@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.utfpr.myapplication.common.BaseActivity;
 import com.utfpr.myapplication.databinding.ActivityLoginBinding;
+import com.utfpr.myapplication.models.User;
 import com.utfpr.myapplication.modules.tutorial.TutorialActivity;
 
 /**
@@ -38,9 +39,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
 
-    // [START declare_auth]
     private FirebaseAuth mAuth;
-    // [END declare_auth]
 
     private GoogleSignInClient mGoogleSignInClient;
 //    private TextView mStatusTextView;
@@ -78,13 +77,23 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
 
             getDataBind().googleLogin.setOnClickListener(view -> signIn());
 
-            getViewModel().getTutorialItemLivedata().observe(this, list -> {
-                if (list != null) {
-                    TutorialActivity.launch(LoginActivity.this, list);
-                    LoginActivity.this.finish();
-                }
-            });
+            observeViewModel();
         }
+    }
+
+    public void observeViewModel(){
+        getViewModel().getTutorialItemLivedata().observe(this, list -> {
+            if (list != null) {
+                TutorialActivity.launch(LoginActivity.this, list);
+                LoginActivity.this.finish();
+            }
+        });
+
+        getViewModel().getGoToMainActivityLiveData().observe(this, goToMain -> {
+            if (goToMain != null && goToMain) {
+                MainActivity.launchAndClearTop(LoginActivity.this);
+            }
+        });
     }
 
     @Override
@@ -140,7 +149,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
 
                             //TODO create preferences to decide stuff
 //                            TutorialActivity.launch(LoginActivity.this);
-                            getViewModel().loadTutorial();
+                            getViewModel().loadUser(mAuth.getUid(), new User());
 
                         } else {
                             // If sign in fails, display a message to the user.

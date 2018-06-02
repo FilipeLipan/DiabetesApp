@@ -2,6 +2,7 @@ package com.utfpr.myapplication.di.module;
 
 import com.utfpr.myapplication.LoginActivity;
 import com.utfpr.myapplication.MainActivity;
+import com.utfpr.myapplication.modules.foot_scanner.FootScannerActivity;
 import com.utfpr.myapplication.modules.tutorial.TutorialActivity;
 
 import dagger.Module;
@@ -23,4 +24,7 @@ public abstract class ActivityBindingModule {
 
     @ContributesAndroidInjector()
     abstract MainActivity bindMainActivity();
+
+    @ContributesAndroidInjector()
+    abstract FootScannerActivity bindFootScannerActivity();
 }

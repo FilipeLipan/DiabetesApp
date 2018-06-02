@@ -11,6 +11,7 @@ import com.utfpr.myapplication.LoginViewModel;
 import com.utfpr.myapplication.MainViewModel;
 import com.utfpr.myapplication.common.ViewModelProviderFactory;
 import com.utfpr.myapplication.di.ViewModelKey;
+import com.utfpr.myapplication.modules.foot_scanner.FootScannerViewModel;
 import com.utfpr.myapplication.modules.tutorial.TutorialItemViewModel;
 import com.utfpr.myapplication.modules.tutorial.TutorialViewModel;
 
@@ -44,4 +45,9 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel.class)
     abstract ViewModel bindMainViewModel(MainViewModel var1);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FootScannerViewModel.class)
+    abstract ViewModel bindFootScannerViewModel(FootScannerViewModel var1);
 }

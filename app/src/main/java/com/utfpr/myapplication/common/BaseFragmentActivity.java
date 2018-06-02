@@ -2,6 +2,8 @@ package com.utfpr.myapplication.common;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,7 +23,7 @@ import dagger.android.support.HasSupportFragmentInjector;
  * Created by lispa on 25/03/2018.
  */
 
-public abstract class BaseFragmentActivity<V extends ViewModel> extends AppCompatActivity implements HasSupportFragmentInjector {
+public abstract class BaseFragmentActivity<V extends ViewModel, B extends ViewDataBinding> extends AppCompatActivity implements HasSupportFragmentInjector {
 
     @Inject
     protected DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
@@ -29,17 +31,20 @@ public abstract class BaseFragmentActivity<V extends ViewModel> extends AppCompa
     @Inject
     protected ViewModelProvider.Factory viewModelFactory;
 
-    abstract V getViewModel();
+    protected B binding;
+    public abstract V getViewModel();
     public abstract Integer getActivityLayout();
-    abstract FrameLayout getContainer();
-    abstract Toolbar getToolbar();
+    public abstract FrameLayout getContainer();
+    protected abstract Toolbar getToolbar();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, getActivityLayout());
 
-        setContentView(getActivityLayout());
-        setSupportActionBar(getToolbar());
+        if(getActivityLayout() != null) {
+            setSupportActionBar(getToolbar());
+        }
     }
 
     public void setTitle(@NonNull String title) {
@@ -97,4 +102,13 @@ public abstract class BaseFragmentActivity<V extends ViewModel> extends AppCompa
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingAndroidInjector;
     }
+
+    public B getDataBind() {
+        return binding;
+    }
+
+    public ViewModelProvider.Factory getViewModelFactory() {
+        return this.viewModelFactory;
+    }
+
 }

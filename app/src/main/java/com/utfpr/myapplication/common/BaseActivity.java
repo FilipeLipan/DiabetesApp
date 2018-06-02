@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.arch.lifecycle.ViewModelProvider.Factory;
 
 import com.utfpr.myapplication.R;
+import com.utfpr.myapplication.di.ActivityInjectable;
 import com.utfpr.myapplication.di.Injectable;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ import javax.inject.Inject;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public abstract class BaseActivity<V extends ViewModel, B extends ViewDataBinding> extends AppCompatActivity implements Injectable {
+public abstract class BaseActivity<V extends ViewModel, B extends ViewDataBinding> extends AppCompatActivity implements ActivityInjectable {
 
     @Inject
     ViewModelProvider.Factory mViewModelFactory;

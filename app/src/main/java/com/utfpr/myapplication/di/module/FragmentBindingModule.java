@@ -10,7 +10,7 @@ import dagger.android.ContributesAndroidInjector;
  */
 
 @Module
-abstract class FragmentBindingModule {
+public abstract class FragmentBindingModule {
 
 //    @ContributesAndroidInjector
 //    abstract CardsFragment contributeCardsFragment();

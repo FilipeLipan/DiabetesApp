@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Diabetes</string>
     <string name="skip">pular</string>
     <string name="let_get_started">Vamos começar!</string>
     <string name="sing_in_with_google">Entrar com o Google</string>
+    <string name="scan">scan</string>
 </resources>

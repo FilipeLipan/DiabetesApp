@@ -55,14 +55,14 @@ public class TutorialItemFragment extends BaseFragment<TutorialItemViewModel, Fr
         }
 
         getDataBind().skipTutorialButton.setOnClickListener(view1 -> {
-            MainActivity.launch(getContext());
-            getActivity().finish();
+            getViewModel().sawTutorial();
+            MainActivity.launchAndClearTop(getContext());
         });
     }
 
     @Override
     public TutorialItemViewModel getViewModel() {
-        return ViewModelProviders.of(this).get(TutorialItemViewModel.class);
+        return ViewModelProviders.of(this, viewModelFactory).get(TutorialItemViewModel.class);
     }
 
     @Override

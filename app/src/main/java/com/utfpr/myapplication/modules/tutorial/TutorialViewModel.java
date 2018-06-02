@@ -2,6 +2,8 @@ package com.utfpr.myapplication.modules.tutorial;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.utfpr.myapplication.data.local.LocalPreferences;
+
 import javax.inject.Inject;
 
 /**
@@ -10,8 +12,14 @@ import javax.inject.Inject;
 
 public class TutorialViewModel extends ViewModel {
 
-    @Inject
-    public TutorialViewModel(){
+    private LocalPreferences localPreferences;
 
+    @Inject
+    public TutorialViewModel(LocalPreferences localPreferences){
+        this.localPreferences = localPreferences;
+    }
+
+    public void sawTutorial(){
+        localPreferences.sawTutorial();
     }
 }

@@ -26,8 +26,14 @@
         <activity
             android:name=".modules.tutorial.TutorialActivity"
             android:theme="@style/FullScreen"/>
+        <activity android:name=".modules.foot_scanner.FootScannerActivity" />
 
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 </manifest>

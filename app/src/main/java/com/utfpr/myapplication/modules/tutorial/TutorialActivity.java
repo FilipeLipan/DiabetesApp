@@ -7,13 +7,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.ViewParent;
+import android.widget.FrameLayout;
 
 import com.rd.PageIndicatorView;
 import com.utfpr.myapplication.LoginViewModel;
 import com.utfpr.myapplication.MainActivity;
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.common.BaseActivity;
+import com.utfpr.myapplication.common.BaseFragmentActivity;
+import com.utfpr.myapplication.databinding.ActivityTutorialBinding;
+import com.utfpr.myapplication.di.Injectable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +27,7 @@ import java.util.List;
  * Created by lispa on 27/03/2018.
  */
 
-public class TutorialActivity extends BaseActivity {
-
+public class TutorialActivity extends BaseFragmentActivity<TutorialViewModel, ActivityTutorialBinding> {
 
     private TutorialViewPagerAdapter viewPagerAdapter;
 
@@ -39,25 +43,35 @@ public class TutorialActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ViewPager viewPager = findViewById(R.id.viewpager);
-        PageIndicatorView viewpagerIndicator = findViewById(R.id.viewpager_indicator);
-
         ArrayList<TutorialItem> tutorialItems = getIntent().getParcelableArrayListExtra(TUTORIAL_KEY);
 
         viewPagerAdapter = new TutorialViewPagerAdapter(getSupportFragmentManager(), tutorialItems);
-
-        viewpagerIndicator.setViewPager(viewPager);
-
-        viewPager.setAdapter(viewPagerAdapter);
+        getDataBind().viewpagerIndicator.setViewPager(getDataBind().viewpager);
+        getDataBind().viewpager.setAdapter(viewPagerAdapter);
     }
 
     @Override
-    public ViewModel getViewModel() {
-        return ViewModelProviders.of(this, getViewModelFactory()).get(LoginViewModel.class);
+    public TutorialViewModel getViewModel() {
+        return ViewModelProviders.of(this, getViewModelFactory()).get(TutorialViewModel.class);
     }
 
     @Override
     public Integer getActivityLayout() {
         return R.layout.activity_tutorial;
     }
+
+    @Override
+    public FrameLayout getContainer() {
+        return null;
+    }
+
+    @Override
+    protected Toolbar getToolbar() {
+        return null;
+    }
+
+    public void sawTutorial(){
+        getViewModel().sawTutorial();
+    }
+
 }
