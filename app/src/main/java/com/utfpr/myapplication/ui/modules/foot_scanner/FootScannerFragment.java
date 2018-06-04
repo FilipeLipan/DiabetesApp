@@ -1,37 +1,43 @@
-package com.utfpr.myapplication.modules.foot_scanner;
+package com.utfpr.myapplication.ui.modules.foot_scanner;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
-import  android.content.Intent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.utfpr.myapplication.R;
-import com.utfpr.myapplication.common.BaseActivity;
 import com.utfpr.myapplication.databinding.ActivityFootScannerBinding;
+import com.utfpr.myapplication.ui.common.BaseFragment;
 import com.utfpr.myapplication.utils.ImagePicker;
 
-public class FootScannerActivity extends BaseActivity<FootScannerViewModel, ActivityFootScannerBinding> {
+public class FootScannerFragment extends BaseFragment<FootScannerViewModel, ActivityFootScannerBinding> {
 
-    public static void launch(Context context){
-        Intent intent = new Intent(context, FootScannerActivity.class);
-        context.startActivity(intent);
+    public static FootScannerFragment newInstance(){
+        return new FootScannerFragment();
     }
 
     @Override
     public FootScannerViewModel getViewModel() {
-        return ViewModelProviders.of(this, getViewModelFactory()).get(FootScannerViewModel.class);
+        return ViewModelProviders.of(this, viewModelFactory).get(FootScannerViewModel.class);
     }
 
     @Override
-    public Integer getActivityLayout() {
+    public String getFragmentTag() {
+        return "FootScannerFragment";
+    }
+
+    @Override
+    public int getFragmentLayout() {
         return R.layout.activity_foot_scanner;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         getDataBind().progressbar.setVisibility(View.INVISIBLE);
 
         getViewModel().getScanResult().observe(this, observer -> {
@@ -46,7 +52,7 @@ public class FootScannerActivity extends BaseActivity<FootScannerViewModel, Acti
             }
         });
 
-        getDataBind().scanButton.setOnClickListener(view -> {
+        getDataBind().scanButton.setOnClickListener(v -> {
             getDataBind().resultTextview.setText("");
             startCameraActivity();
         });
@@ -56,19 +62,20 @@ public class FootScannerActivity extends BaseActivity<FootScannerViewModel, Acti
 
     public void startCameraActivity() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(this.getPackageManager()) != null) {
+        if (cameraIntent.resolveActivity(getContext().getPackageManager()) != null) {
             startActivityForResult(cameraIntent, PICK_USER_PROFILE_IMAGE);
         }
     }
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_USER_PROFILE_IMAGE) {
                 getDataBind().progressbar.setVisibility(View.VISIBLE);
-                    getViewModel().startScanning(ImagePicker.getImageFromResult(this, resultCode, data));
+                    getViewModel().startScanning(ImagePicker.getImageFromResult(getContext(), resultCode, data));
             }
         }
     }

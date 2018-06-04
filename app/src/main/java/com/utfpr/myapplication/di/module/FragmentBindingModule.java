@@ -1,6 +1,8 @@
 package com.utfpr.myapplication.di.module;
 
-import com.utfpr.myapplication.modules.tutorial.TutorialItemFragment;
+import com.utfpr.myapplication.ui.modules.foot_scanner.FootScannerFragment;
+import com.utfpr.myapplication.ui.modules.main.FragmentMain;
+import com.utfpr.myapplication.ui.modules.tutorial.TutorialItemFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -23,5 +25,11 @@ public abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     abstract TutorialItemFragment contributeTutorialItemFragment();
+
+    @ContributesAndroidInjector
+    abstract FootScannerFragment contributeFootScannerFragment();
+
+    @ContributesAndroidInjector
+    abstract FragmentMain contributeFragmentMain();
 }
 

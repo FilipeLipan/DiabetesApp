@@ -1,4 +1,4 @@
-package com.utfpr.myapplication;
+package com.utfpr.myapplication.ui;
 
 import android.arch.lifecycle.ViewModel;
 

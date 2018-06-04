@@ -7,6 +7,7 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.VisionRequestInitializer;
+import com.utfpr.myapplication.BuildConfig;
 import com.utfpr.myapplication.data.local.LocalPreferences;
 import com.utfpr.myapplication.data.local.UserPreferences;
 
@@ -38,7 +39,7 @@ public class AppModule {
                 new AndroidJsonFactory(),
                 null);
 
-        visionBuilder.setVisionRequestInitializer(new VisionRequestInitializer(""));
+        visionBuilder.setVisionRequestInitializer(new VisionRequestInitializer(BuildConfig.VISION_API_KEY));
         return visionBuilder.build();
     }
 

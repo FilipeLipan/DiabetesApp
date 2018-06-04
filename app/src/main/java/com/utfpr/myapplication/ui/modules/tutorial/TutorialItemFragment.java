@@ -1,18 +1,14 @@
-package com.utfpr.myapplication.modules.tutorial;
+package com.utfpr.myapplication.ui.modules.tutorial;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.utfpr.myapplication.MainActivity;
+import com.utfpr.myapplication.ui.MainActivity;
 import com.utfpr.myapplication.R;
-import com.utfpr.myapplication.common.BaseFragment;
+import com.utfpr.myapplication.ui.common.BaseFragment;
 import com.utfpr.myapplication.databinding.FragmentTutorialItemBinding;
 
 /**

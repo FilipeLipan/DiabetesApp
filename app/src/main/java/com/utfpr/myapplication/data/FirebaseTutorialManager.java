@@ -5,11 +5,10 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.utfpr.myapplication.modules.tutorial.TutorialItem;
-import java.util.ArrayList;
+import com.utfpr.myapplication.ui.modules.tutorial.TutorialItem;
+
 import java.util.List;
 
 import io.reactivex.Observable;

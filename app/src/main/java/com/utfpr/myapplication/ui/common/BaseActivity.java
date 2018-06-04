@@ -1,4 +1,4 @@
-package com.utfpr.myapplication.common;
+package com.utfpr.myapplication.ui.common;
 
 /**
  * Created by lispa on 24/03/2018.
@@ -10,18 +10,11 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.arch.lifecycle.ViewModelProvider.Factory;
 
-import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.di.ActivityInjectable;
-import com.utfpr.myapplication.di.Injectable;
 
 import javax.inject.Inject;
-
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
 
 public abstract class BaseActivity<V extends ViewModel, B extends ViewDataBinding> extends AppCompatActivity implements ActivityInjectable {
 

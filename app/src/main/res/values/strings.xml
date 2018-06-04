@@ -4,4 +4,9 @@
     <string name="let_get_started">Vamos começar!</string>
     <string name="sing_in_with_google">Entrar com o Google</string>
     <string name="scan">scan</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="foot_scan">Scan de pé</string>
 </resources>

@@ -1,24 +1,17 @@
-package com.utfpr.myapplication.modules.tutorial;
+package com.utfpr.myapplication.ui.modules.tutorial;
 
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.ViewParent;
 import android.widget.FrameLayout;
 
-import com.rd.PageIndicatorView;
-import com.utfpr.myapplication.LoginViewModel;
-import com.utfpr.myapplication.MainActivity;
 import com.utfpr.myapplication.R;
-import com.utfpr.myapplication.common.BaseActivity;
-import com.utfpr.myapplication.common.BaseFragmentActivity;
+import com.utfpr.myapplication.ui.MainActivity;
+import com.utfpr.myapplication.ui.common.BaseFragmentActivity;
 import com.utfpr.myapplication.databinding.ActivityTutorialBinding;
-import com.utfpr.myapplication.di.Injectable;
 
 import java.util.ArrayList;
 import java.util.List;

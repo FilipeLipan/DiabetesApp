@@ -1,4 +1,4 @@
-package com.utfpr.myapplication.common;
+package com.utfpr.myapplication.ui.common;
 
 import android.support.v4.app.Fragment;
 

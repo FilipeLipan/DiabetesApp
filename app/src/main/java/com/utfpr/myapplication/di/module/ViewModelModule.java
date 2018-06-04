@@ -7,13 +7,14 @@ import dagger.multibindings.IntoMap;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.utfpr.myapplication.LoginViewModel;
-import com.utfpr.myapplication.MainViewModel;
-import com.utfpr.myapplication.common.ViewModelProviderFactory;
+import com.utfpr.myapplication.ui.modules.login.LoginViewModel;
+import com.utfpr.myapplication.ui.MainViewModel;
+import com.utfpr.myapplication.ui.common.ViewModelProviderFactory;
 import com.utfpr.myapplication.di.ViewModelKey;
-import com.utfpr.myapplication.modules.foot_scanner.FootScannerViewModel;
-import com.utfpr.myapplication.modules.tutorial.TutorialItemViewModel;
-import com.utfpr.myapplication.modules.tutorial.TutorialViewModel;
+import com.utfpr.myapplication.ui.modules.foot_scanner.FootScannerViewModel;
+import com.utfpr.myapplication.ui.modules.main.MainFragmentViewModel;
+import com.utfpr.myapplication.ui.modules.tutorial.TutorialItemViewModel;
+import com.utfpr.myapplication.ui.modules.tutorial.TutorialViewModel;
 
 /**
  * Created by lispa on 31/03/2018.
@@ -45,6 +46,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel.class)
     abstract ViewModel bindMainViewModel(MainViewModel var1);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainFragmentViewModel.class)
+    abstract ViewModel bindMainFragmentViewModel(MainFragmentViewModel var1);
 
     @Binds
     @IntoMap

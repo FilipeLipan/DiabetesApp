@@ -1,4 +1,4 @@
-package com.utfpr.myapplication.modules.tutorial;
+package com.utfpr.myapplication.ui.modules.tutorial;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

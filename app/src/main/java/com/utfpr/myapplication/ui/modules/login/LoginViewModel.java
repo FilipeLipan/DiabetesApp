@@ -1,4 +1,4 @@
-package com.utfpr.myapplication;
+package com.utfpr.myapplication.ui.modules.login;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -10,7 +10,7 @@ import com.utfpr.myapplication.data.UserNotFoundException;
 import com.utfpr.myapplication.data.local.LocalPreferences;
 import com.utfpr.myapplication.data.local.UserPreferences;
 import com.utfpr.myapplication.models.User;
-import com.utfpr.myapplication.modules.tutorial.TutorialItem;
+import com.utfpr.myapplication.ui.modules.tutorial.TutorialItem;
 
 import java.util.List;
 

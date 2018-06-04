@@ -1,9 +1,8 @@
-package com.utfpr.myapplication.modules.foot_scanner;
+package com.utfpr.myapplication.ui.modules.foot_scanner;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.graphics.Bitmap;
-import android.widget.Toast;
 
 import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.model.AnnotateImageRequest;
@@ -17,7 +16,6 @@ import com.google.api.services.vision.v1.model.WebEntity;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import io.reactivex.Observable;

@@ -1,4 +1,4 @@
-package com.utfpr.myapplication;
+package com.utfpr.myapplication.ui.modules.login;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -24,10 +22,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.utfpr.myapplication.common.BaseActivity;
+import com.utfpr.myapplication.ui.MainActivity;
+import com.utfpr.myapplication.R;
+import com.utfpr.myapplication.ui.common.BaseActivity;
 import com.utfpr.myapplication.databinding.ActivityLoginBinding;
 import com.utfpr.myapplication.models.User;
-import com.utfpr.myapplication.modules.tutorial.TutorialActivity;
+import com.utfpr.myapplication.ui.modules.tutorial.TutorialActivity;
 
 /**
  * Created by lispa on 25/03/2018.
@@ -48,6 +48,12 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
 
     public static void launch(Context context){
         Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void launchAndClearTop(Context context){
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
