@@ -57,20 +57,11 @@ public class MainActivity extends BaseFragmentActivity<MainViewModel, ActivityMa
             replaceFragment(FragmentMain.newInstance());
         }
 
-//        getDataBind().scanDemoButton.setOnClickListener(view -> {
-//            FootScannerActivity.launch(this);});
-
-//        getDataBind().logoutButton.setOnClickListener( v ->{
-//            FirebaseAuth.getInstance().signOut();
-//            LoginActivity.launch(MainActivity.this);
-//            MainActivity.this.finish();
-//        });
-
-
         getDataBind().navigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     replaceFragment(FragmentMain.newInstance());
+                    return true;
                 case R.id.navigation_foot_scanner:
                     replaceFragment(FootScannerFragment.newInstance());
                     return true;
