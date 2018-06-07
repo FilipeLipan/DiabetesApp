@@ -5,22 +5,27 @@ import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
+import android.widget.Toast;
 
+import com.theartofdev.edmodo.cropper.CropImage;
 import com.utfpr.myapplication.R;
-import com.utfpr.myapplication.databinding.ActivityFootScannerBinding;
+import com.utfpr.myapplication.databinding.FragmentFootScannerBinding;
 import com.utfpr.myapplication.ui.common.BaseFragment;
-import com.utfpr.myapplication.utils.ImagePicker;
 
 
-public class FootScannerFragment extends BaseFragment<FootScannerViewModel, ActivityFootScannerBinding> {
+public class FootScannerFragment extends BaseFragment<FootScannerViewModel, FragmentFootScannerBinding> {
 
     private final int CAMERA_PERMISSION = 1556;
     public static final int PICK_USER_PROFILE_IMAGE = 1000;
+
+    private Bitmap mBitmap;
+    private Uri mUri;
 
     public static FootScannerFragment newInstance() {
         return new FootScannerFragment();
@@ -38,7 +43,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Acti
 
     @Override
     public int getFragmentLayout() {
-        return R.layout.activity_foot_scanner;
+        return R.layout.fragment_foot_scanner;
     }
 
     @Override
@@ -47,6 +52,11 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Acti
 
         getDataBind().progressbar.setVisibility(View.INVISIBLE);
 
+        observeViewModel();
+        setUpClickListeners();
+    }
+
+    private void observeViewModel(){
         getViewModel().getScanResult().observe(this, observer -> {
             if (observer != null) {
                 if (observer) {
@@ -58,22 +68,33 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Acti
                 }
             }
         });
-
-        getDataBind().scanButton.setOnClickListener(v -> {
-            getDataBind().resultTextview.setText("");
-            checkPermission();
-        });
     }
 
+    private void setUpClickListeners(){
+        getDataBind().scanButton.setOnClickListener(v -> {
+            getDataBind().resultTextview.setText("");
+            if(mBitmap != null){
+                getDataBind().progressbar.setVisibility(View.VISIBLE);
+                getViewModel().startScanning(mBitmap);
+            }
+        });
+
+        getDataBind().clickToTakePictureInclude.setOnClickListener(view1 -> checkPermissionAndStartPicture());
+        getDataBind().cropImageView.setOnCropImageCompleteListener((view1, result) -> mBitmap = result.getBitmap());
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == PICK_USER_PROFILE_IMAGE) {
-                getDataBind().progressbar.setVisibility(View.VISIBLE);
-                getViewModel().startScanning(ImagePicker.getImageFromResult(getContext(), resultCode, data));
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == Activity.RESULT_OK) {
+                mUri = result.getUri();
+                getDataBind().cropImageView.setImageUriAsync(mUri);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+                Toast.makeText(getContext(), R.string.cant_load_photo, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -91,7 +112,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Acti
     }
 
 
-    private void checkPermission() {
+    private void checkPermissionAndStartPicture() {
         if (ActivityCompat.checkSelfPermission(getContext(),
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getContext(),
@@ -105,9 +126,9 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Acti
     }
 
     private void startCameraActivity() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(getContext().getPackageManager()) != null) {
-            startActivityForResult(cameraIntent, PICK_USER_PROFILE_IMAGE);
-        }
+        CropImage.activity()
+                .start(getContext(), this);
     }
+
+
 }

@@ -22,3 +22,5 @@
 
 -keepattributes Signature
 -keepattributes *Annotation*
+
+-keep class android.support.v7.widget.** { *; }

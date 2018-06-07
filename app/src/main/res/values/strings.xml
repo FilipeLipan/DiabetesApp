@@ -9,4 +9,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="foot_scan">Scan de pé</string>
+    <string name="click_to_take_picture">Clique para tirar foto</string>
+    <string name="cant_load_photo">Não foi possivel carregar a foto</string>
 </resources>

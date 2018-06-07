@@ -44,6 +44,6 @@ ext{
     rxCacheVersion = '1.8.1-2.x'
     rxCacheGsonVersion = '0.0.3'
 
-    firebaseVersion = '11.8.0'
+    firebaseVersion = '17.0.1'
 }
 
