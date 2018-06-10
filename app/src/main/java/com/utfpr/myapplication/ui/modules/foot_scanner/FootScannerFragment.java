@@ -32,7 +32,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
 
     private final int CAMERA_PERMISSION = 1556;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_TAKE_PHOTO = 1;
+    public static final int PICK_USER_PROFILE_IMAGE = 1000;
 
     private String mCurrentPhotoPath;
 
@@ -84,7 +84,9 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
             getDataBind().resultTextview.setText("");
             if(mCurrentPhotoPath != null){
                 getDataBind().progressbar.setVisibility(View.VISIBLE);
-                getViewModel().startScanning(ImagePicker.getImageBitmap(getContext(), mCurrentPhotoPath));
+                Bitmap bitmap = ImagePicker.getImageBitmap(getContext(), mCurrentPhotoPath);
+                getViewModel().startScanning(bitmap);
+                getDataBind().photoImageView.setImageBitmap(bitmap);
             }
         });
 
@@ -95,14 +97,12 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-//            Bundle extras = data.getExtras();
-//            mBitmap = (Bitmap) extras.get("data");
-            setPic();
-        }else {
-            Toast.makeText(getActivity(), "Image Capture Failed", Toast.LENGTH_SHORT)
-                    .show();
-        }
+                if (resultCode == Activity.RESULT_OK) {
+                        if (requestCode == PICK_USER_PROFILE_IMAGE) {
+                                getDataBind().progressbar.setVisibility(View.VISIBLE);
+                                    getViewModel().startScanning(ImagePicker.getImageFromResult(getContext(), resultCode, data));
+                          }
+                   }
     }
 
     @Override
@@ -112,7 +112,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
         if(requestCode == CAMERA_PERMISSION){
             if (permissions[0].equals(Manifest.permission.CAMERA)
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                dispatchTakePictureIntent();
+                startCameraActivity();
             }
         }
     }
@@ -123,7 +123,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getContext(),
                         Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            dispatchTakePictureIntent();
+            startCameraActivity();
         } else {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{android.Manifest.permission.CAMERA},
@@ -131,46 +131,12 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
         }
     }
 
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
+
+    public void startCameraActivity() {
+              Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+              if (cameraIntent.resolveActivity(getContext().getPackageManager()) != null) {
+                      startActivityForResult(cameraIntent, PICK_USER_PROFILE_IMAGE);
+                 }
             }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(getContext(),
-                        "com.utfpr.myapplication.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-            }
-        }
-    }
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
-
-    private void setPic() {
-        getDataBind().photoImageView.setImageBitmap(ImagePicker.getImageBitmap(getContext(), mCurrentPhotoPath));
-    }
 
 }
