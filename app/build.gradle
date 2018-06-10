@@ -14,11 +14,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.jetbrains.kotlin.android.extensions'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 26
     defaultConfig {
         applicationId "com.utfpr.myapplication"
         minSdkVersion 18
-        targetSdkVersion 27
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -51,9 +51,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation 'com.android.support:support-vector-drawable:27.1.1'
+    implementation 'com.android.support:support-vector-drawable:26.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -107,13 +107,12 @@ dependencies {
 
     compile 'com.google.api-client:google-api-client-android:1.22.0'
     compile 'com.google.apis:google-api-services-vision:v1-rev357-1.22.0'
-    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:cardview-v7:26.1.0'
     compile('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
         transitive = true;
     }
-    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:design:26.1.0'
 
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
 
     implementation 'com.android.support:multidex:1.0.3'
 }

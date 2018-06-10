@@ -3,6 +3,8 @@ package com.utfpr.myapplication.ui.modules.foot_scanner;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.View;
 
 import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.model.AnnotateImageRequest;
@@ -49,9 +51,12 @@ public class FootScannerViewModel extends ViewModel {
         return scanResult;
     }
 
-    public void startScanning(Bitmap bmp){
+    public void startScanning(Bitmap bitmap){
 
-        scanBitmap(bmp)
+        compositeDisposable.clear();
+        compositeDisposable.dispose();
+
+            scanBitmap(bitmap)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<Boolean>() {
@@ -74,14 +79,14 @@ public class FootScannerViewModel extends ViewModel {
     }
 
 
-    private Observable<Boolean> scanBitmap(Bitmap bmp) {
+    private Observable<Boolean> scanBitmap(Bitmap bitmap) {
         return Observable.create(emitter -> {
 
             try {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
-                bmp.recycle();
+                bitmap.recycle();
 
                 Image inputImage = new Image();
                 inputImage.encodeContent(byteArray);
@@ -125,6 +130,8 @@ public class FootScannerViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
+        compositeDisposable.clear();
         compositeDisposable.dispose();
     }
+
 }

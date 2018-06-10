@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <!-- pressed state -->
+            <item android:state_pressed="true">
+                <inset xmlns:android="http://schemas.android.com/apk/res/android">
+                    <shape android:shape="rectangle">
+                        <solid android:color="?attr/colorControlHighlight" />
+                        <padding android:bottom="@dimen/button_padding_vertical_material" android:left="@dimen/button_padding_horizontal_material" android:right="@dimen/button_padding_horizontal_material" android:top="@dimen/button_padding_vertical_material" />
+                        <padding android:bottom="@dimen/button_padding_vertical_material" android:left="@dimen/button_padding_horizontal_material" android:right="@dimen/button_padding_horizontal_material" android:top="@dimen/button_padding_vertical_material" />
+                        <corners android:bottomLeftRadius="@dimen/button_corner" android:bottomRightRadius="@dimen/button_corner" android:topLeftRadius="@dimen/button_corner" android:topRightRadius="@dimen/button_corner"/>
+                    </shape>
+                </inset>
+            </item>
+
+            <!-- focused state -->
+            <item android:state_focused="true">
+                <inset xmlns:android="http://schemas.android.com/apk/res/android">
+                    <shape android:shape="rectangle">
+                        <solid android:color="?attr/colorControlHighlight" />
+                        <padding android:bottom="@dimen/button_padding_vertical_material" android:left="@dimen/button_padding_horizontal_material" android:right="@dimen/button_padding_horizontal_material" android:top="@dimen/button_padding_vertical_material" />
+                        <corners android:bottomLeftRadius="@dimen/button_corner" android:bottomRightRadius="@dimen/button_corner" android:topLeftRadius="@dimen/button_corner" android:topRightRadius="@dimen/button_corner"/>
+                    </shape>
+                </inset>
+            </item>
+
+            <!-- focused state -->
+            <item android:state_enabled="false">
+                <inset xmlns:android="http://schemas.android.com/apk/res/android">
+                    <shape android:shape="rectangle">
+                        <corners android:bottomLeftRadius="@dimen/control_corner_material" android:bottomRightRadius="@dimen/control_corner_material" android:topLeftRadius="@dimen/control_corner_material" android:topRightRadius="@dimen/control_corner_material" />
+                        <solid android:color="?attr/colorControlHighlight" />
+                        <padding android:bottom="@dimen/button_padding_vertical_material" android:left="@dimen/button_padding_horizontal_material" android:right="@dimen/button_padding_horizontal_material" android:top="@dimen/button_padding_vertical_material" />
+                        <corners android:bottomLeftRadius="@dimen/button_corner" android:bottomRightRadius="@dimen/button_corner" android:topLeftRadius="@dimen/button_corner" android:topRightRadius="@dimen/button_corner"/>
+                    </shape>
+                </inset>
+            </item>
+
+            <!-- normal state -->
+            <item>
+                <inset xmlns:android="http://schemas.android.com/apk/res/android">
+                    <shape android:shape="rectangle">
+                        <solid android:color="@android:color/white" />
+                        <padding android:bottom="@dimen/button_padding_vertical_material" android:left="@dimen/button_padding_horizontal_material" android:right="@dimen/button_padding_horizontal_material" android:top="@dimen/button_padding_vertical_material" />
+                        <corners android:bottomLeftRadius="@dimen/button_corner" android:bottomRightRadius="@dimen/button_corner" android:topLeftRadius="@dimen/button_corner" android:topRightRadius="@dimen/button_corner"/>
+                    </shape>
+                </inset>
+            </item>
+        </selector>

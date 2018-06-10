@@ -6,26 +6,35 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.Toast;
 
-import com.theartofdev.edmodo.cropper.CropImage;
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.databinding.FragmentFootScannerBinding;
 import com.utfpr.myapplication.ui.common.BaseFragment;
+import com.utfpr.myapplication.utils.ImagePicker;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class FootScannerFragment extends BaseFragment<FootScannerViewModel, FragmentFootScannerBinding> {
 
     private final int CAMERA_PERMISSION = 1556;
-    public static final int PICK_USER_PROFILE_IMAGE = 1000;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_TAKE_PHOTO = 1;
 
-    private Bitmap mBitmap;
-    private Uri mUri;
+    private String mCurrentPhotoPath;
 
     public static FootScannerFragment newInstance() {
         return new FootScannerFragment();
@@ -73,29 +82,26 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
     private void setUpClickListeners(){
         getDataBind().scanButton.setOnClickListener(v -> {
             getDataBind().resultTextview.setText("");
-            if(mBitmap != null){
+            if(mCurrentPhotoPath != null){
                 getDataBind().progressbar.setVisibility(View.VISIBLE);
-                getViewModel().startScanning(mBitmap);
+                getViewModel().startScanning(ImagePicker.getImageBitmap(getContext(), mCurrentPhotoPath));
             }
         });
 
         getDataBind().clickToTakePictureInclude.setOnClickListener(view1 -> checkPermissionAndStartPicture());
-        getDataBind().cropImageView.setOnCropImageCompleteListener((view1, result) -> mBitmap = result.getBitmap());
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == Activity.RESULT_OK) {
-                mUri = result.getUri();
-                getDataBind().cropImageView.setImageUriAsync(mUri);
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
-                Toast.makeText(getContext(), R.string.cant_load_photo, Toast.LENGTH_SHORT).show();
-            }
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+//            Bundle extras = data.getExtras();
+//            mBitmap = (Bitmap) extras.get("data");
+            setPic();
+        }else {
+            Toast.makeText(getActivity(), "Image Capture Failed", Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 
@@ -106,7 +112,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
         if(requestCode == CAMERA_PERMISSION){
             if (permissions[0].equals(Manifest.permission.CAMERA)
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startCameraActivity();
+                dispatchTakePictureIntent();
             }
         }
     }
@@ -117,18 +123,54 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(getContext(),
                         Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            dispatchTakePictureIntent();
+        } else {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{android.Manifest.permission.CAMERA},
                     CAMERA_PERMISSION);
-        } else {
-            startCameraActivity();
         }
     }
 
-    private void startCameraActivity() {
-        CropImage.activity()
-                .start(getContext(), this);
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(getContext(),
+                        "com.utfpr.myapplication.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
+        }
     }
 
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    private void setPic() {
+        getDataBind().photoImageView.setImageBitmap(ImagePicker.getImageBitmap(getContext(), mCurrentPhotoPath));
+    }
 
 }

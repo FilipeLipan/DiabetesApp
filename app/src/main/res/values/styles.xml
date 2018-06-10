@@ -33,6 +33,13 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="AccentReverseButton">
+        <item name="android:background">@drawable/accent_reverse_button_background</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 
     <style name="PrimaryColorButton">
         <item name="android:layout_marginBottom">@dimen/heavy_vertical_margin</item>

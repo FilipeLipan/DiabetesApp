@@ -29,6 +29,8 @@ task clean(type: Delete) {
 }
 
 ext{
+    design_version = "26.1.0"
+
     dagger_version = "2.11"
     arch_version = "1.0.0"
     rxJavaVersion = '2.1.0'
@@ -44,6 +46,6 @@ ext{
     rxCacheVersion = '1.8.1-2.x'
     rxCacheGsonVersion = '0.0.3'
 
-    firebaseVersion = '17.0.1'
+    firebaseVersion = '11.8.0'
 }
 
