@@ -80,17 +80,18 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
     }
 
     private void setUpClickListeners(){
-        getDataBind().scanButton.setOnClickListener(v -> {
-            getDataBind().resultTextview.setText("");
-            if(mCurrentPhotoPath != null){
-                getDataBind().progressbar.setVisibility(View.VISIBLE);
-                Bitmap bitmap = ImagePicker.getImageBitmap(getContext(), mCurrentPhotoPath);
-                getViewModel().startScanning(bitmap);
-                getDataBind().photoImageView.setImageBitmap(bitmap);
-            }
-        });
+//        getDataBind().scanButton.setOnClickListener(v -> {
+//            getDataBind().resultTextview.setText("");
+//            if(mCurrentPhotoPath != null){
+//                getDataBind().progressbar.setVisibility(View.VISIBLE);
+//                Bitmap bitmap = ImagePicker.getImageBitmap(getContext(), mCurrentPhotoPath);
+//                getViewModel().startScanning(bitmap);
+//                getDataBind().photoImageView.setImageBitmap(bitmap);
+//            }
+//        });
 
-        getDataBind().clickToTakePictureInclude.setOnClickListener(view1 -> checkPermissionAndStartPicture());
+        getDataBind().clickToTakePictureInclude.setOnClickListener(v -> checkPermissionAndStartPicture());
+        getDataBind().takePhotoButton.setOnClickListener(v -> checkPermissionAndStartPicture());
     }
 
     @Override
@@ -100,7 +101,10 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
                 if (resultCode == Activity.RESULT_OK) {
                         if (requestCode == PICK_USER_PROFILE_IMAGE) {
                                 getDataBind().progressbar.setVisibility(View.VISIBLE);
-                                    getViewModel().startScanning(ImagePicker.getImageFromResult(getContext(), resultCode, data));
+                            getDataBind().clickToTakePictureInclude.setVisibility(View.INVISIBLE);
+                            Bitmap bitmap = ImagePicker.getImageFromResult(getContext(), resultCode, data);
+                                    getViewModel().startScanning(bitmap);
+                                    getDataBind().photoImageView.setImageBitmap(bitmap);
                           }
                    }
     }
