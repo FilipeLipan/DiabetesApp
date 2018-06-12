@@ -7,4 +7,5 @@
 
 
     <color name="google_button_pressed">#EEEEEE</color>
+    <color name="white_shadow">#90FFFFFF</color>
 </resources>

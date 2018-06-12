@@ -6,35 +6,22 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.view.View;
-import android.widget.Toast;
 
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.databinding.FragmentFootScannerBinding;
 import com.utfpr.myapplication.ui.common.BaseFragment;
+import com.utfpr.myapplication.ui.common.BaseFragmentActivity;
 import com.utfpr.myapplication.utils.ImagePicker;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 public class FootScannerFragment extends BaseFragment<FootScannerViewModel, FragmentFootScannerBinding> {
 
     private final int CAMERA_PERMISSION = 1556;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int PICK_USER_PROFILE_IMAGE = 1000;
-
-    private String mCurrentPhotoPath;
 
     public static FootScannerFragment newInstance() {
         return new FootScannerFragment();
@@ -58,8 +45,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        getDataBind().progressbar.setVisibility(View.INVISIBLE);
+        ((BaseFragmentActivity) getActivity()).setTitle(getString(R.string.foot_scan));
 
         observeViewModel();
         setUpClickListeners();
@@ -69,10 +55,8 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
         getViewModel().getScanResult().observe(this, observer -> {
             if (observer != null) {
                 if (observer) {
-                    getDataBind().progressbar.setVisibility(View.INVISIBLE);
                     getDataBind().resultTextview.setText("Ferida detectada");
                 } else {
-                    getDataBind().progressbar.setVisibility(View.INVISIBLE);
                     getDataBind().resultTextview.setText("Ferida não detectada");
                 }
             }
@@ -80,16 +64,6 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
     }
 
     private void setUpClickListeners(){
-//        getDataBind().scanButton.setOnClickListener(v -> {
-//            getDataBind().resultTextview.setText("");
-//            if(mCurrentPhotoPath != null){
-//                getDataBind().progressbar.setVisibility(View.VISIBLE);
-//                Bitmap bitmap = ImagePicker.getImageBitmap(getContext(), mCurrentPhotoPath);
-//                getViewModel().startScanning(bitmap);
-//                getDataBind().photoImageView.setImageBitmap(bitmap);
-//            }
-//        });
-
         getDataBind().clickToTakePictureInclude.setOnClickListener(v -> checkPermissionAndStartPicture());
         getDataBind().takePhotoButton.setOnClickListener(v -> checkPermissionAndStartPicture());
     }
@@ -100,7 +74,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
 
                 if (resultCode == Activity.RESULT_OK) {
                         if (requestCode == PICK_USER_PROFILE_IMAGE) {
-                                getDataBind().progressbar.setVisibility(View.VISIBLE);
+
                             getDataBind().clickToTakePictureInclude.setVisibility(View.INVISIBLE);
                             Bitmap bitmap = ImagePicker.getImageFromResult(getContext(), resultCode, data);
                                     getViewModel().startScanning(bitmap);
@@ -143,4 +117,13 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
                  }
             }
 
+    @Override
+    public void showLoading() {
+        getDataBind().loadingInclude.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        getDataBind().loadingInclude.setVisibility(View.GONE);
+    }
 }

@@ -1,10 +1,7 @@
 package com.utfpr.myapplication.ui.modules.foot_scanner;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.view.View;
 
 import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.model.AnnotateImageRequest;
@@ -14,6 +11,7 @@ import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
 import com.google.api.services.vision.v1.model.WebDetection;
 import com.google.api.services.vision.v1.model.WebEntity;
+import com.utfpr.myapplication.ui.common.BaseViewModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -33,7 +31,7 @@ import javax.inject.Inject;
  * Created by lispa on 22/04/2018.
  */
 
-public class FootScannerViewModel extends ViewModel {
+public class FootScannerViewModel extends BaseViewModel {
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -52,6 +50,7 @@ public class FootScannerViewModel extends ViewModel {
     }
 
     public void startScanning(Bitmap bitmap){
+        showLoading();
 
         compositeDisposable.clear();
         compositeDisposable.dispose();
@@ -62,12 +61,13 @@ public class FootScannerViewModel extends ViewModel {
                 .subscribeWith(new DisposableObserver<Boolean>() {
                     @Override
                     public void onNext(Boolean aBoolean) {
+                        hideLoading();
                         scanResult.setValue(aBoolean);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        //TODO handle error
+                        hideLoading();
                         scanResult.setValue(false);
                     }
 
@@ -94,6 +94,7 @@ public class FootScannerViewModel extends ViewModel {
 
                 Feature desiredFeature = new Feature();
                 desiredFeature.setType("WEB_DETECTION");
+                desiredFeature.setMaxResults(50);
 
                 AnnotateImageRequest request = new AnnotateImageRequest();
                 request.setImage(inputImage);
@@ -109,7 +110,7 @@ public class FootScannerViewModel extends ViewModel {
 
                 Boolean verify = false;
                 for (WebEntity webEntity : ((ArrayList<WebEntity>) results.get("webEntities"))) {
-                    if ((webEntity.getDescription().contains("Diabetic foot") || webEntity.getDescription().contains("Disease") ||
+                    if ((webEntity.getDescription().contains("Diabetic foot") || webEntity.getDescription().contains("Disease") || webEntity.getDescription().contains("Injury") ||
                             webEntity.getDescription().contains("Wound") || webEntity.getDescription().contains("Wound healing"))
                             && Double.valueOf(webEntity.getScore()) > 0.4) {
                         verify = true;
@@ -133,5 +134,6 @@ public class FootScannerViewModel extends ViewModel {
         compositeDisposable.clear();
         compositeDisposable.dispose();
     }
+
 
 }

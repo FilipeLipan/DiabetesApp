@@ -12,6 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/result_textview"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        tools:text="Detectado"
         app:layout_constraintBottom_toTopOf="@id/photo_ImageView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -39,10 +42,11 @@
         app:layout_constraintBottom_toBottomOf="@id/photo_ImageView"/>
 
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressbar"
+    <include
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/loading_include"
+        layout="@layout/include_loading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

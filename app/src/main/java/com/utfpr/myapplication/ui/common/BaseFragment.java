@@ -20,7 +20,7 @@ import javax.inject.Inject;
  * Created by lispa on 25/03/2018.
  */
 
-public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBinding> extends Fragment implements Injectable{
+public abstract class BaseFragment<V extends BaseViewModel, B extends ViewDataBinding> extends Fragment implements Injectable{
 
     @Inject
     protected ViewModelProvider.Factory viewModelFactory;
@@ -50,6 +50,20 @@ public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBindin
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.mViewModel = mViewModel == null ? getViewModel() : mViewModel;
+
+        observeViewModel();
+    }
+
+    private void observeViewModel(){
+        getViewModel().getLoading().observe(this, isLoading -> {
+            if (isLoading != null) {
+                if (isLoading) {
+                    showLoading();
+                } else {
+                    hideLoading();
+                }
+            }
+        });
     }
 
     public B getDataBind() {
@@ -58,5 +72,14 @@ public abstract class BaseFragment<V extends ViewModel, B extends ViewDataBindin
 
     public BaseFragmentActivity getBaseActivity(){
         return (BaseFragmentActivity) getActivity();
+    }
+
+
+    public void showLoading(){
+
+    }
+
+    public void hideLoading(){
+
     }
 }

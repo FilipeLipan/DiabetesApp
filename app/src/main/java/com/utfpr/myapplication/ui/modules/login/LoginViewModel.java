@@ -10,6 +10,7 @@ import com.utfpr.myapplication.data.UserNotFoundException;
 import com.utfpr.myapplication.data.local.LocalPreferences;
 import com.utfpr.myapplication.data.local.UserPreferences;
 import com.utfpr.myapplication.models.User;
+import com.utfpr.myapplication.ui.common.BaseViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialItem;
 
 import java.util.List;
@@ -27,7 +28,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by lispa on 25/03/2018.
  */
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends BaseViewModel {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private MutableLiveData<List<TutorialItem>> tutorialItemLivedata = new MutableLiveData<>();
