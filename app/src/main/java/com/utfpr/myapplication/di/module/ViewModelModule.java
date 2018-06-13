@@ -13,6 +13,7 @@ import com.utfpr.myapplication.ui.common.ViewModelProviderFactory;
 import com.utfpr.myapplication.di.ViewModelKey;
 import com.utfpr.myapplication.ui.modules.foot_scanner.FootScannerViewModel;
 import com.utfpr.myapplication.ui.modules.main.MainFragmentViewModel;
+import com.utfpr.myapplication.ui.modules.measuring_pressure.MeasuringPressureViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialItemViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialViewModel;
 
@@ -30,7 +31,6 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel.class)
     abstract ViewModel bindLoginViewModel(LoginViewModel var1);
-
 
     @Binds
     @IntoMap
@@ -56,4 +56,9 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FootScannerViewModel.class)
     abstract ViewModel bindFootScannerViewModel(FootScannerViewModel var1);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FootScannerViewModel.class)
+    abstract ViewModel bindMeasuringPressureViewModel(MeasuringPressureViewModel var1);
 }
