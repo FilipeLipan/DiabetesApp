@@ -6,10 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.utfpr.myapplication.R;
-import com.utfpr.myapplication.databinding.FragmentTutorialItemBinding;
+import com.utfpr.myapplication.databinding.FragmentMeasuringPressureBinding;
 import com.utfpr.myapplication.ui.common.BaseFragment;
 
-public class MeasuringPressureFragment extends BaseFragment<MeasuringPressureViewModel, FragmentTutorialItemBinding> {
+public class MeasuringPressureFragment extends BaseFragment<MeasuringPressureViewModel, FragmentMeasuringPressureBinding> {
 
     public static MeasuringPressureFragment newInstance(){
         return new MeasuringPressureFragment();
@@ -19,7 +19,7 @@ public class MeasuringPressureFragment extends BaseFragment<MeasuringPressureVie
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        getBaseActivity().setTitle(getString(R.string.measuring_pressure));
 
     }
 

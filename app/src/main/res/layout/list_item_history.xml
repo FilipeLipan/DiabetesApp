@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/extra_small_vertical_margin"
+    android:paddingBottom="@dimen/extra_small_vertical_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/day_number_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="25"
+        android:textSize="26sp"
+        android:layout_marginStart="@dimen/heavy_horizontal_margin"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jul"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/day_number_textview"
+        app:layout_constraintTop_toBottomOf="@id/day_number_textview"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/backgroud_view"
+        android:background="#26A69A"
+        style="?attr/selectableItemBackground"
+        android:layout_marginStart="66dp"
+        android:layout_marginEnd="@dimen/medium_vertical_margin"
+        app:layout_constraintTop_toTopOf="@id/scan_type_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/scan_fulldate_textview"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Exame de pressão"
+        android:id="@+id/scan_type_textview"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:paddingTop="@dimen/small_vertical_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/small_horizontal_margin"
+        android:layout_marginStart="@dimen/small_horizontal_margin"
+        app:layout_constraintEnd_toEndOf="@id/backgroud_view"
+        app:layout_constraintStart_toStartOf="@id/backgroud_view"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/scan_fulldate_textview"
+        android:text="08:00 - risco detectado"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="16sp"
+        android:paddingBottom="@dimen/small_vertical_margin"
+        app:layout_constraintTop_toBottomOf="@id/scan_type_textview"
+        android:layout_marginEnd="@dimen/small_horizontal_margin"
+        android:layout_marginStart="@dimen/small_horizontal_margin"
+        app:layout_constraintEnd_toEndOf="@id/backgroud_view"
+        app:layout_constraintStart_toStartOf="@id/backgroud_view"/>
+</android.support.constraint.ConstraintLayout>

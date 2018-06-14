@@ -11,4 +11,13 @@
         android:icon="@drawable/ic_mn_foot"
         android:title="@string/foot_scan" />
 
+    <item
+        android:id="@+id/navigation_measuring_pressure"
+        android:icon="@drawable/ic_mn_measuring_pressure"
+        android:title="@string/measuring_pressure" />
+
+    <item
+        android:id="@+id/navigation_history"
+        android:icon="@drawable/ic_mn_history"
+        android:title="@string/history" />
 </menu>

@@ -14,6 +14,7 @@ import com.utfpr.myapplication.di.ViewModelKey;
 import com.utfpr.myapplication.ui.modules.foot_scanner.FootScannerViewModel;
 import com.utfpr.myapplication.ui.modules.main.MainFragmentViewModel;
 import com.utfpr.myapplication.ui.modules.measuring_pressure.MeasuringPressureViewModel;
+import com.utfpr.myapplication.ui.modules.history.HistoryViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialItemViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialViewModel;
 
@@ -59,6 +60,11 @@ public abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(FootScannerViewModel.class)
+    @ViewModelKey(MeasuringPressureViewModel.class)
     abstract ViewModel bindMeasuringPressureViewModel(MeasuringPressureViewModel var1);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HistoryViewModel.class)
+    abstract ViewModel bindHistoryViewModel(HistoryViewModel var1);
 }

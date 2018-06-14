@@ -45,7 +45,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((BaseFragmentActivity) getActivity()).setTitle(getString(R.string.foot_scan));
+        getBaseActivity().setTitle(getString(R.string.foot_scan));
 
         observeViewModel();
         setUpClickListeners();

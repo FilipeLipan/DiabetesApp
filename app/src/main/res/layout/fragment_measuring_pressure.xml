@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
-    <com.github.florent37.shapeofview.ShapeOfView
-        android:id="@+id/heart_container_shape_view"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginBottom="8dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999"
-        app:shape_clip_drawable="@drawable/heart">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/holo_red_dark"
-            android:scaleType="centerCrop" />
-
-    </com.github.florent37.shapeofview.ShapeOfView>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/beat_per_minute_textview"
-        tools:text="100"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="80sp"
-        android:layout_marginTop="@dimen/medium_vertical_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/heart_container_shape_view"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/beat_per_minute_label_textview"
-        android:text="@string/beats_per_minute"
-        android:fontFamily="sans-serif-medium"
-        android:textSize="26sp"
-        android:layout_marginTop="@dimen/small_vertical_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/beat_per_minute_textview"/>
+        <com.github.florent37.shapeofview.ShapeOfView
+            android:id="@+id/heart_container_shape_view"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19999999"
+            app:shape_clip_drawable="@drawable/heart">
 
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_red_dark"
+                android:scaleType="centerCrop" />
 
-</android.support.constraint.ConstraintLayout>
+        </com.github.florent37.shapeofview.ShapeOfView>
+
+
+        <TextView
+            android:id="@+id/beat_per_minute_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_vertical_margin"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="80sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/heart_container_shape_view"
+            android:text="100" />
+
+        <TextView
+            android:id="@+id/beat_per_minute_label_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_vertical_margin"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/beats_per_minute"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/beat_per_minute_textview" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

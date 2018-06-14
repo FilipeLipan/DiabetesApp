@@ -1,6 +1,7 @@
 package com.utfpr.myapplication.di.module;
 
 import com.utfpr.myapplication.ui.modules.foot_scanner.FootScannerFragment;
+import com.utfpr.myapplication.ui.modules.history.HistoryFragment;
 import com.utfpr.myapplication.ui.modules.main.FragmentMain;
 import com.utfpr.myapplication.ui.modules.measuring_pressure.MeasuringPressureFragment;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialItemFragment;
@@ -26,5 +27,8 @@ public abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     abstract MeasuringPressureFragment contributeMeasuringPressureFragment();
+
+    @ContributesAndroidInjector
+    abstract HistoryFragment contributeHistoryFragment();
 }
 

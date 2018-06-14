@@ -43,7 +43,10 @@ public abstract class BaseFragmentActivity<V extends ViewModel, B extends ViewDa
         binding = DataBindingUtil.setContentView(this, getActivityLayout());
 
         if(getActivityLayout() != null) {
-            setSupportActionBar(getToolbar());
+            if(getToolbar() != null) {
+                setSupportActionBar(getToolbar());
+                getToolbar().setTitleTextColor(getResources().getColor(android.R.color.white));
+            }
         }
     }
 

@@ -7,6 +7,7 @@
     <dimen name="medium_horizontal_margin">12dp</dimen>
     <dimen name="heavy_horizontal_margin">16dp</dimen>
 
+    <dimen name="extra_small_vertical_margin">8dp</dimen>
     <dimen name="small_vertical_margin">8dp</dimen>
     <dimen name="medium_vertical_margin">12dp</dimen>
     <dimen name="heavy_vertical_margin">16dp</dimen>
