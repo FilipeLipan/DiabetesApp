@@ -3,6 +3,8 @@ package com.utfpr.myapplication.app;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.crashlytics.android.Crashlytics;
@@ -16,7 +18,7 @@ import dagger.android.HasServiceInjector;
 import io.fabric.sdk.android.Fabric;
 import javax.inject.Inject;
 
-public class App extends Application implements HasActivityInjector {
+public class App extends MultiDexApplication implements HasActivityInjector {
 
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingActivityAndroidInjector;
@@ -24,6 +26,7 @@ public class App extends Application implements HasActivityInjector {
 
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         Fabric.with(this, new Crashlytics());
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         this.initializeInjector();

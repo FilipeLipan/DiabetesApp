@@ -14,4 +14,7 @@
     <string name="beats_per_minute">Batimentos por minuto</string>
     <string name="history">Histórico</string>
     <string name="measuring_pressure">Medir pressão</string>
+    <string name="grafico_do_exame">Gráfico do exame</string>
+    <string name="result">Resultado:</string>
+    <string name="measure_pressure_detail">Detalhes do exame de pressão</string>
 </resources>

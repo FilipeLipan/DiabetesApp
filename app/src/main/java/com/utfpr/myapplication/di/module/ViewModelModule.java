@@ -7,6 +7,7 @@ import dagger.multibindings.IntoMap;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
+import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailViewModel;
 import com.utfpr.myapplication.ui.modules.login.LoginViewModel;
 import com.utfpr.myapplication.ui.MainViewModel;
 import com.utfpr.myapplication.ui.common.ViewModelProviderFactory;
@@ -67,4 +68,9 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HistoryViewModel.class)
     abstract ViewModel bindHistoryViewModel(HistoryViewModel var1);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MeasurePressureDetailViewModel.class)
+    abstract ViewModel bindMeasurePressureDetailViewModel(MeasurePressureDetailViewModel var1);
 }

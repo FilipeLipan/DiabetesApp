@@ -16,6 +16,6 @@ public class HistoryAdapter extends BaseQuickAdapter<HistoryItem, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder helper, HistoryItem item) {
-
+        helper.addOnClickListener(R.id.backgroud_view);
     }
 }
