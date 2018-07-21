@@ -5,13 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.utfpr.myapplication.R;
+import com.utfpr.myapplication.models.History;
 import com.utfpr.myapplication.ui.common.BaseFragment;
 import com.utfpr.myapplication.databinding.FragmentExamHistoryBinding;
 import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExamHistoryBinding> {
 
@@ -27,24 +29,29 @@ public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExam
 
         getBaseActivity().setTitle(getString(R.string.history));
 
-
         initAdapter();
+        observeLiveData();
 
+        getViewModel().getAllUserHistory(FirebaseAuth.getInstance().getUid());
+    }
+
+    private void observeLiveData() {
+        getViewModel().getHistoryMutableLiveData().observe(this, allHistory -> {
+            if(allHistory != null){
+                initViews(allHistory);
+            }
+        });
+    }
+
+    private void initViews(List<History> allHistory) {
+        mAdapter.setNewData(allHistory);
     }
 
     private void initAdapter(){
-        ArrayList<HistoryItem> items = new ArrayList<>();
-
-        for (int i = 0; i < 10 ; i++) {
-            items.add(new HistoryItem());
-        }
-
-        mAdapter = new HistoryAdapter(items);
-
+        mAdapter = new HistoryAdapter(new ArrayList<>());
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            MeasurePressureDetailActivity.launch(getContext());
+            MeasurePressureDetailActivity.launchWithHistory(getContext(), (History) adapter.getData().get(position));
         });
-
         getDataBind().historyRecyclerview.setAdapter(mAdapter);
     }
 

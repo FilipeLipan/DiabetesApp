@@ -56,6 +56,12 @@
             app:layout_constraintTop_toBottomOf="@id/beat_per_minute_textview" />
 
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/teste"
+            android:text="teste"/>
+
     </android.support.constraint.ConstraintLayout>
 
 </layout>

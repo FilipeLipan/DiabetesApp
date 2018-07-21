@@ -8,6 +8,7 @@ import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
@@ -20,7 +21,9 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
+import com.google.firebase.auth.FirebaseAuth;
 import com.utfpr.myapplication.R;
+import com.utfpr.myapplication.models.History;
 import com.utfpr.myapplication.ui.common.BaseActivity;
 import com.utfpr.myapplication.databinding.ActivityMeasurePressureDetailBinding;
 
@@ -28,15 +31,53 @@ import java.util.ArrayList;
 
 public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureDetailViewModel, ActivityMeasurePressureDetailBinding>{
 
-    public static void launch(Context context){
+    private static final String HISTORY_KEY = "history-key";
+    private static final String HISTORY_ID_KEY = "history-id-key";
+
+    public static void launchWithId(Context context, String id){
         Intent intent = new Intent(context, MeasurePressureDetailActivity.class);
+        intent.putExtra(HISTORY_ID_KEY, id);
         context.startActivity(intent);
     }
+
+    public static void launchWithHistory(Context context, History history){
+        Intent intent = new Intent(context, MeasurePressureDetailActivity.class);
+        intent.putExtra(HISTORY_KEY, history);
+        context.startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if(getIntent() != null){
+            if(getIntent().hasExtra(HISTORY_KEY)){
+                initViews(getIntent().getParcelableExtra(HISTORY_KEY));
+            }
+
+            if(getIntent().hasExtra(HISTORY_ID_KEY)){
+                getViewModel().loadHistory(FirebaseAuth.getInstance().getUid(), getIntent().getStringExtra(HISTORY_ID_KEY));
+                observeViewModel();
+            }
+        }
+
+        setUpGraph();
+    }
+
+    private void observeViewModel() {
+        getViewModel().getHistoryMutableLiveData().observe(this, history -> {
+            if(history != null){
+                initViews(history);
+            }
+        });
+    }
+
+    private void initViews(History history) {
+
+    }
+
+    private void setUpGraph(){
 
         getDataBind().chart.setDrawGridBackground(false);
 
@@ -121,7 +162,6 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
 
         // // dont forget to refresh the drawing
         // getDataBind().chart.invalidate();
-
     }
 
     private void setData(int count, float range) {

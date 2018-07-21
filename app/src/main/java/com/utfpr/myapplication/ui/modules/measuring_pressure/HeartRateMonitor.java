@@ -1,9 +1,13 @@
 package com.utfpr.myapplication.ui.modules.measuring_pressure;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
@@ -18,6 +22,11 @@ import android.widget.TextView;
 
 import com.utfpr.myapplication.R;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+
 
 /**
  * This class extends Activity to handle a picture preview, process the preview
@@ -27,36 +36,39 @@ import com.utfpr.myapplication.R;
  */
 public class HeartRateMonitor extends Activity {
 
-    private static final String TAG = "HeartRateMonitor";
-    private static final AtomicBoolean processing = new AtomicBoolean(false);
+    private  final String TAG = "HeartRateMonitor";
+    private  final AtomicBoolean processing = new AtomicBoolean(false);
 
-    private static SurfaceView preview = null;
-    private static SurfaceHolder previewHolder = null;
-    private static Camera camera = null;
-    private static View image = null;
-    private static TextView text = null;
+    private  SurfaceView preview = null;
+    private  SurfaceHolder previewHolder = null;
+    private  Camera camera = null;
+    private  View image = null;
+    private  TextView text = null;
+    private  boolean isRunning;
 
-    private static WakeLock wakeLock = null;
+    private  WakeLock wakeLock = null;
 
-    private static int averageIndex = 0;
-    private static final int averageArraySize = 4;
-    private static final int[] averageArray = new int[averageArraySize];
+    private  int averageIndex = 0;
+    private  final int averageArraySize = 4;
+    private  final int[] averageArray = new int[averageArraySize];
 
-    public static enum TYPE {
+    public  enum TYPE {
         GREEN, RED
     };
 
-    private static TYPE currentType = TYPE.GREEN;
+    private  TYPE currentType = TYPE.GREEN;
 
-    public static TYPE getCurrent() {
+    public  TYPE getCurrent() {
         return currentType;
     }
 
-    private static int beatsIndex = 0;
-    private static final int beatsArraySize = 3;
-    private static final int[] beatsArray = new int[beatsArraySize];
-    private static double beats = 0;
-    private static long startTime = 0;
+    private  int beatsIndex = 0;
+    private  final int beatsArraySize = 3;
+    private  final int[] beatsArray = new int[beatsArraySize];
+    private  double beats = 0;
+    private  long startTime = 0;
+    private  List<Long> beatLog = new ArrayList<>();
+    private CompositeDisposable disposable;
 
     /**
      * {@inheritDoc}
@@ -66,6 +78,7 @@ public class HeartRateMonitor extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         preview = (SurfaceView) findViewById(R.id.preview);
         previewHolder = preview.getHolder();
         previewHolder.addCallback(surfaceCallback);
@@ -75,7 +88,7 @@ public class HeartRateMonitor extends Activity {
         text = (TextView) findViewById(R.id.text);
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "DoNotDimScreen");
+        wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DoNotDimScreen");
     }
 
     /**
@@ -115,7 +128,7 @@ public class HeartRateMonitor extends Activity {
         camera = null;
     }
 
-    private static PreviewCallback previewCallback = new PreviewCallback() {
+    private  PreviewCallback previewCallback = new PreviewCallback() {
 
         /**
          * {@inheritDoc}
@@ -153,6 +166,7 @@ public class HeartRateMonitor extends Activity {
                 newType = TYPE.RED;
                 if (newType != currentType) {
                     beats++;
+                    beatLog.add(System.currentTimeMillis());
                     // Log.d(TAG, "BEAT!! beats="+beats);
                 }
             } else if (imgAvg > rollingAverage) {
@@ -172,6 +186,7 @@ public class HeartRateMonitor extends Activity {
             long endTime = System.currentTimeMillis();
             double totalTimeInSecs = (endTime - startTime) / 1000d;
             if (totalTimeInSecs >= 10) {
+                clock();
                 double bps = (beats / totalTimeInSecs);
                 int dpm = (int) (bps * 60d);
                 if (dpm < 30 || dpm > 180) {
@@ -205,7 +220,30 @@ public class HeartRateMonitor extends Activity {
         }
     };
 
-    private static SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
+    private void clock(){
+
+        Observable.timer(1, TimeUnit.MINUTES)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Long>() {
+                    @Override
+                    public void onNext(Long aLong) {
+
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private  SurfaceHolder.Callback surfaceCallback = new SurfaceHolder.Callback() {
 
         /**
          * {@inheritDoc}
@@ -245,7 +283,7 @@ public class HeartRateMonitor extends Activity {
         }
     };
 
-    private static Camera.Size getSmallestPreviewSize(int width, int height, Camera.Parameters parameters) {
+    private Camera.Size getSmallestPreviewSize(int width, int height, Camera.Parameters parameters) {
         Camera.Size result = null;
 
         for (Camera.Size size : parameters.getSupportedPreviewSizes()) {
