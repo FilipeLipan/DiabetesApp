@@ -11,28 +11,30 @@ import com.utfpr.myapplication.models.User;
 
 public class UserPreferences {
 
-    public static final String USER_NAME = "user-name";
-    public static final String USER_PREFERENCES = "user-preferences";
+    private static final String USER_NAME = "user-name";
+    private static final String USER_ID = "user-id";
+    private static final String USER_PREFERENCES = "user-preferences";
     private Context mContext;
     private SharedPreferences mPreferences;
 
-    public UserPreferences(Context context){
+    public UserPreferences(Context context) {
         this.mContext = context;
-        mPreferences = mContext.getSharedPreferences(USER_PREFERENCES,Context.MODE_PRIVATE);
+        mPreferences = mContext.getSharedPreferences(USER_PREFERENCES, Context.MODE_PRIVATE);
     }
 
 
-    public void saveUser(User user){
+    public void saveUser(String userId, User user) {
         mPreferences.edit()
-                .putString(USER_NAME, user.name)
+                .putString(USER_ID, userId)
+                .putString(USER_NAME, user.getName())
                 .apply();
 
     }
 
-    public User getUser(){
-        User user = new User();
-        user.setName(mPreferences.getString(USER_NAME, ""));
+    public User getUser() {
+        return new User()
+                .setName(mPreferences.getString(USER_NAME, ""))
+                .setId(mPreferences.getString(USER_ID, ""));
 
-        return user;
     }
 }

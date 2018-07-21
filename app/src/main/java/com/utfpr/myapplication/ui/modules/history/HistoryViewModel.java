@@ -3,6 +3,7 @@ package com.utfpr.myapplication.ui.modules.history;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.utfpr.myapplication.data.FirebaseUserManager;
 import com.utfpr.myapplication.models.History;
 import com.utfpr.myapplication.ui.common.BaseViewModel;
@@ -20,8 +21,8 @@ public class HistoryViewModel extends BaseViewModel {
     private MutableLiveData<List<History>> historyMutableLiveData = new MutableLiveData<>();
 
     @Inject
-    public HistoryViewModel(){
-
+    HistoryViewModel(){
+        getAllUserHistory(FirebaseAuth.getInstance().getUid());
     }
 
     public LiveData<List<History>> getHistoryMutableLiveData() {

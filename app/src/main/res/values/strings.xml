@@ -17,4 +17,8 @@
     <string name="grafico_do_exame">Gráfico do exame</string>
     <string name="result">Resultado:</string>
     <string name="measure_pressure_detail">Detalhes do exame de pressão</string>
+    <string name="heart_beat_exam">Exame de pressão</string>
+    <string name="history_second_label">%1$s - %2$s</string>
+    <string name="detected">Detectado</string>
+    <string name="normal">Normal</string>
 </resources>

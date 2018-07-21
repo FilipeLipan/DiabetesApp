@@ -3,6 +3,7 @@ package com.utfpr.myapplication.ui.modules.history;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,7 +16,7 @@ import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.Meas
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExamHistoryBinding> {
+public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExamHistoryBinding> implements SwipeRefreshLayout.OnRefreshListener{
 
     private HistoryAdapter mAdapter;
 
@@ -32,7 +33,7 @@ public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExam
         initAdapter();
         observeLiveData();
 
-        getViewModel().getAllUserHistory(FirebaseAuth.getInstance().getUid());
+        getDataBind().swipeToRefresh.setOnRefreshListener(this);
     }
 
     private void observeLiveData() {
@@ -48,11 +49,23 @@ public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExam
     }
 
     private void initAdapter(){
-        mAdapter = new HistoryAdapter(new ArrayList<>());
+        mAdapter = new HistoryAdapter(getContext(), new ArrayList<>());
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             MeasurePressureDetailActivity.launchWithHistory(getContext(), (History) adapter.getData().get(position));
         });
         getDataBind().historyRecyclerview.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void showLoading() {
+        super.showLoading();
+        getDataBind().swipeToRefresh.setRefreshing(true);
+    }
+
+    @Override
+    public void hideLoading() {
+        super.hideLoading();
+        getDataBind().swipeToRefresh.setRefreshing(false);
     }
 
     @Override
@@ -68,5 +81,12 @@ public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExam
     @Override
     public int getFragmentLayout() {
         return R.layout.fragment_exam_history;
+    }
+
+    @Override
+    public void onRefresh() {
+        if(!getDataBind().swipeToRefresh.isRefreshing()) {
+            getViewModel().getAllUserHistory(FirebaseAuth.getInstance().getUid());
+        }
     }
 }

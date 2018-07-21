@@ -8,6 +8,7 @@ import java.util.Date;
 public class History implements Parcelable {
     private Date createdAt;
     private String result;
+    private String type;
 
     public Date getCreatedAt() {
         return createdAt;
@@ -27,6 +28,15 @@ public class History implements Parcelable {
         return this;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public History setType(String type) {
+        this.type = type;
+        return this;
+    }
+
 
     @Override
     public int describeContents() {
@@ -37,6 +47,7 @@ public class History implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.createdAt != null ? this.createdAt.getTime() : -1);
         dest.writeString(this.result);
+        dest.writeString(this.type);
     }
 
     public History() {
@@ -46,9 +57,10 @@ public class History implements Parcelable {
         long tmpCreatedAt = in.readLong();
         this.createdAt = tmpCreatedAt == -1 ? null : new Date(tmpCreatedAt);
         this.result = in.readString();
+        this.type = in.readString();
     }
 
-    public static final Parcelable.Creator<History> CREATOR = new Parcelable.Creator<History>() {
+    public static final Creator<History> CREATOR = new Creator<History>() {
         @Override
         public History createFromParcel(Parcel source) {
             return new History(source);

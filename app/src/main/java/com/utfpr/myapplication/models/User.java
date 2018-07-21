@@ -5,21 +5,28 @@ package com.utfpr.myapplication.models;
  */
 
 public class User {
-    public String name;
+    private String id;
+    private String name;
 
     public User(){
 
     }
 
-    public User(String name){
-        this.name = name;
+    public String getId() {
+        return id;
+    }
+
+    public User setId(String id) {
+        this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public User setName(String name) {
         this.name = name;
+        return this;
     }
 }

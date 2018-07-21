@@ -61,4 +61,12 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
+    <style name="ListItemClickable">
+        <item name="android:background">@drawable/list_item_clickable_background</item>
+    </style>
+
+    <style name="ListItemNonClickable">
+        <item name="android:background">@drawable/list_item_nonclickable_background</item>
+    </style>
+
 </resources>

@@ -2,7 +2,6 @@ package com.utfpr.myapplication.ui.modules.login;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 
 import com.utfpr.myapplication.data.FirebaseTutorialManager;
 import com.utfpr.myapplication.data.FirebaseUserManager;
@@ -34,13 +33,13 @@ public class LoginViewModel extends BaseViewModel {
     private MutableLiveData<List<TutorialItem>> tutorialItemLivedata = new MutableLiveData<>();
     private MutableLiveData<Boolean> goToMainActivityLiveData = new MutableLiveData<Boolean>();
 
-    private LocalPreferences localPreferences;
-    private UserPreferences userPreferences;
+    private LocalPreferences mLocalPreferences;
+    private UserPreferences mUserPreferences;
 
     @Inject
     public LoginViewModel(LocalPreferences localPreferences, UserPreferences userPreferences){
-        this.userPreferences = userPreferences;
-        this.localPreferences = localPreferences;
+        this.mUserPreferences = userPreferences;
+        this.mLocalPreferences = localPreferences;
     }
 
     public LiveData<List<TutorialItem>> getTutorialItemLivedata() {
@@ -81,7 +80,8 @@ public class LoginViewModel extends BaseViewModel {
                 .subscribeWith(new DisposableObserver<User>() {
                     @Override
                     public void onNext(User user) {
-                        if(localPreferences.didSawTutorial()){
+                        mUserPreferences.saveUser(userId, user);
+                        if(mLocalPreferences.didSawTutorial()){
                             goToMainActivityLiveData.setValue(true);
                         }else {
                             loadTutorial();
