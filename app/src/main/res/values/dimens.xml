@@ -3,9 +3,9 @@
     <dimen name="tutorial_image_size">120dp</dimen>
     <dimen name="tutorial_image_margin_top">90dp</dimen>
 
-    <dimen name="small_horizontal_margin">8dp</dimen>
-    <dimen name="medium_horizontal_margin">12dp</dimen>
-    <dimen name="heavy_horizontal_margin">16dp</dimen>
+    <dimen name="small_horizontal_spacing">8dp</dimen>
+    <dimen name="medium_horizontal_spacing">12dp</dimen>
+    <dimen name="heavy_horizontal_spacing">16dp</dimen>
 
     <dimen name="extra_small_vertical_margin">8dp</dimen>
     <dimen name="small_vertical_margin">8dp</dimen>
@@ -25,5 +25,9 @@
     <dimen name="camera_icon_hieght">60dp</dimen>
     <dimen name="chart_height">250dp</dimen>
     <dimen name="bottom_pading">30dp</dimen>
+    <dimen name="list_item_title_size">16sp</dimen>
+    <dimen name="screen_title">20sp</dimen>
+    <dimen name="screen_title_spacing">30dp</dimen>
+    <dimen name="subtitle_size">16sp</dimen>
 
 </resources>

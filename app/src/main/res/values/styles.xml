@@ -20,8 +20,8 @@
 
 
     <style name="tutorialText">
-        <item name="android:layout_marginStart">@dimen/heavy_horizontal_margin</item>
-        <item name="android:layout_marginEnd">@dimen/heavy_horizontal_margin</item>
+        <item name="android:layout_marginStart">@dimen/heavy_horizontal_spacing</item>
+        <item name="android:layout_marginEnd">@dimen/heavy_horizontal_spacing</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -43,8 +43,8 @@
 
     <style name="PrimaryColorButton">
         <item name="android:layout_marginBottom">@dimen/heavy_vertical_margin</item>
-        <item name="android:layout_marginLeft">@dimen/heavy_horizontal_margin</item>
-        <item name="android:layout_marginRight">@dimen/heavy_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/heavy_horizontal_spacing</item>
+        <item name="android:layout_marginRight">@dimen/heavy_horizontal_spacing</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:background">@drawable/accent_button_background</item>
         <item name="android:textColor">@android:color/white</item>
@@ -53,8 +53,8 @@
 
     <style name="GoogleButton">
         <item name="android:layout_marginBottom">@dimen/heavy_vertical_margin</item>
-        <item name="android:layout_marginLeft">@dimen/heavy_horizontal_margin</item>
-        <item name="android:layout_marginRight">@dimen/heavy_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/heavy_horizontal_spacing</item>
+        <item name="android:layout_marginRight">@dimen/heavy_horizontal_spacing</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:background">@drawable/google_button_background</item>
         <item name="android:textSize">16sp</item>
@@ -69,4 +69,13 @@
         <item name="android:background">@drawable/list_item_nonclickable_background</item>
     </style>
 
+    <style name="ListItemTitle">
+        <item name="android:textColor">@android:color/white</item>
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/list_item_title_size"
+        android:paddingBottom="@dimen/small_vertical_margin"
+    </style>
 </resources>

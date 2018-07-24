@@ -21,4 +21,7 @@
     <string name="history_second_label">%1$s - %2$s</string>
     <string name="detected">Detectado</string>
     <string name="normal">Normal</string>
+    <string name="what_to_do_now">O quê fazer agora?</string>
+    <string name="normal_what_to_do_text" />
+    <string name="detected_what_to_do_text" />
 </resources>

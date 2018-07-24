@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
@@ -24,8 +22,11 @@ import com.github.mikephil.charting.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.models.History;
+import com.utfpr.myapplication.models.HistoryChartEntry;
 import com.utfpr.myapplication.ui.common.BaseActivity;
 import com.utfpr.myapplication.databinding.ActivityMeasurePressureDetailBinding;
+import com.utfpr.myapplication.utils.ColorUtils;
+import com.utfpr.myapplication.utils.StringUtils;
 
 import java.util.ArrayList;
 
@@ -62,7 +63,6 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
             }
         }
 
-        setUpGraph();
     }
 
     private void observeViewModel() {
@@ -74,10 +74,13 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
     }
 
     private void initViews(History history) {
-
+        getDataBind().resultTextview.setText(StringUtils.getResultType(this, history.getResult()));
+        getDataBind().resultTextview.setTextColor(ColorUtils.getResultTypeColor(this, history.getResult()));
+        getDataBind().whatDoNowTextview.setText(StringUtils.getWhatToDoTest(this, history.getResult()));
+        setUpGraph(history);
     }
 
-    private void setUpGraph(){
+    private void setUpGraph(History history){
 
         getDataBind().chart.setDrawGridBackground(false);
 
@@ -88,22 +91,13 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
         getDataBind().chart.setTouchEnabled(true);
 
         // enable scaling and dragging
-        getDataBind().chart.setDragEnabled(true);
-        getDataBind().chart.setScaleEnabled(true);
-        // getDataBind().chart.setScaleXEnabled(true);
-        // getDataBind().chart.setScaleYEnabled(true);
+        getDataBind().chart.setDragEnabled(false);
+        getDataBind().chart.setScaleEnabled(false);
+         getDataBind().chart.setScaleXEnabled(false);
+         getDataBind().chart.setScaleYEnabled(false);
 
         // if disabled, scaling can be done on x- and y-axis separately
         getDataBind().chart.setPinchZoom(true);
-
-        // set an alternative background color
-        // getDataBind().chart.setBackgroundColor(Color.GRAY);
-
-        // create a custom MarkerView (extend MarkerView) and specify the layout
-        // to use for it
-//        MyMarkerView mv = new MyMarkerView(this, R.layout.custom_marker_view);
-//        mv.setChartView(getDataBind().chart); // For bounds control
-//        getDataBind().chart.setMarker(mv); // Set the marker to the chart
 
         // x-axis limit line
         LimitLine llXAxis = new LimitLine(10f, "Index 10");
@@ -113,11 +107,11 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
 
         XAxis xAxis = getDataBind().chart.getXAxis();
 
-        xAxis.enableGridDashedLine(10f, 10f, 0f);
+//        xAxis.enableGridDashedLine(10f, 10f, 0f);
         xAxis.setValueFormatter(new MyCustomXAxisValueFormatter());
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setEnabled(true);
         //xAxis.addLimitLine(llXAxis); // add x-axis limit line
-
-
 
 //        LimitLine ll1 = new LimitLine(150f, "Upper Limit");
 //        ll1.setLineWidth(4f);
@@ -125,34 +119,25 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
 //        ll1.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
 //        ll1.setTextSize(10f);
 
-        YAxis leftAxis = getDataBind().chart.getAxisLeft();
-        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
-//        leftAxis.addLimitLine(ll1);
-        leftAxis.setAxisMaximum(150f);
-        leftAxis.setAxisMinimum(-50f);
-        leftAxis.setDrawGridLines(false);
-        //leftAxis.setYOffset(20f);
-//        leftAxis.enableGridDashedLine(10f, 10f, 0f);
-        leftAxis.setDrawZeroLine(false);
+        YAxis rightAxis = getDataBind().chart.getAxisRight();
+        rightAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
+//        rightAxis.addLimitLine(ll1);
+        rightAxis.setAxisMaximum(150f);
+        rightAxis.setAxisMinimum(-50f);
+        rightAxis.setDrawGridLines(false);
+        rightAxis.setDrawZeroLine(false);
+        rightAxis.setValueFormatter(new MyCustomYAxisValueFormatter());
 
         // limit lines are drawn behind data (and not on top)
-        leftAxis.setDrawLimitLinesBehindData(false);
-        leftAxis.setDrawLabels(false);
+        rightAxis.setDrawLimitLinesBehindData(false);
+        rightAxis.setDrawLabels(false);
 
-        getDataBind().chart.getAxisRight().setEnabled(false);
-
-        //getDataBind().chart.getViewPortHandler().setMaximumScaleY(2f);
-        //getDataBind().chart.getViewPortHandler().setMaximumScaleX(2f);
+        getDataBind().chart.getAxisLeft().setEnabled(true);
 
         // add data
-
-        setData(10, 30);
-//        getDataBind().chart.setVisibleXRange(20);
-//        getDataBind().chart.setVisibleYRange(20f, AxisDependency.LEFT);
-//        getDataBind().chart.centerViewTo(20, 50, AxisDependency.LEFT);
+        setData(history.getEntries());
 
         getDataBind().chart.animateX(2500);
-        //getDataBind().chart.invalidate();
 
         // get the legend (only possible after setting data)
         Legend l = getDataBind().chart.getLegend();
@@ -160,21 +145,16 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
         // modify the legend ...
         l.setForm(Legend.LegendForm.LINE);
 
-        // // dont forget to refresh the drawing
-        // getDataBind().chart.invalidate();
+        //dont forget to refresh the drawing
+         getDataBind().chart.invalidate();
     }
 
-    private void setData(int count, float range) {
+    private void setData(ArrayList<HistoryChartEntry> entries) {
 
         ArrayList<Entry> values = new ArrayList<>();
 
-        for (int i = 0; i < count; i++) {
-
-            if (i%3 == 0) {
-                values.add(new Entry(i, 100));
-            }else {
-                values.add(new Entry(i, 0));
-            }
+        for (HistoryChartEntry historyChartEntry : entries) {
+            values.add(new Entry(historyChartEntry.getX(), historyChartEntry.getY()));
         }
 
         LineDataSet set1;
@@ -193,10 +173,7 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
             set1.setDrawValues(false);
 
             // set the line to be drawn like this "- - - - - -"
-//            set1.enableDashedLine(10f, 5f, 0f);
-//            set1.enableDashedHighlightLine(10f, 5f, 0f);
             set1.setColor(Color.RED);
-//            set1.setCircleColor(Color.RED);
             set1.setLineWidth(2f);
 
             set1.setCircleRadius(3f);
