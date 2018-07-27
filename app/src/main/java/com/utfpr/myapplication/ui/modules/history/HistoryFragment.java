@@ -12,6 +12,7 @@ import com.utfpr.myapplication.models.History;
 import com.utfpr.myapplication.ui.common.BaseFragment;
 import com.utfpr.myapplication.databinding.FragmentExamHistoryBinding;
 import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailActivity;
+import com.utfpr.myapplication.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,10 @@ public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExam
     private void initAdapter(){
         mAdapter = new HistoryAdapter(getContext(), new ArrayList<>());
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            MeasurePressureDetailActivity.launchWithHistory(getContext(), (History) adapter.getData().get(position));
+            History history = (History) adapter.getData().get(position);
+            if(history.getType().equalsIgnoreCase(StringUtils.HEART_BEAT_TYPE)) {
+                MeasurePressureDetailActivity.launchWithHistory(getContext(),history);
+            }
         });
         getDataBind().historyRecyclerview.setAdapter(mAdapter);
     }

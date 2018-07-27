@@ -29,7 +29,7 @@ public class HistoryAdapter extends BaseQuickAdapter<History, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, History item) {
-
+        helper.addOnClickListener(R.id.backgroud_view);
 
         helper.setText(R.id.day_number_textview, mDayFormatter.format(item.getCreatedAt()))
                 .setText(R.id.month_name_textview, mMonthFormatter.format(item.getCreatedAt()).toUpperCase())
@@ -45,8 +45,6 @@ public class HistoryAdapter extends BaseQuickAdapter<History, BaseViewHolder> {
             view.setEnabled(false);
             view.setClickable(false);
             view.setFocusable(false);
-        }else {
-            helper.addOnClickListener(R.id.backgroud_view);
         }
     }
 }
