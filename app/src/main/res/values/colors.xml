@@ -3,9 +3,10 @@
     <color name="colorPrimary">#FF526B</color>
     <color name="colorPrimaryDark">#ff4d67</color>
     <color name="colorAccent">#42B7A5</color>3
-    <color name="accent_button_default_pressed">#9042B7A5</color>
+    <color name="accent_button_default_pressed">#59c0af</color>
+    <color name="accent_button_default_disabled">#7ecec1</color>
 
 
     <color name="google_button_pressed">#EEEEEE</color>
-    <color name="white_shadow">#90FFFFFF</color>
+    <color name="white_shadow">#97FFFFFF</color>
 </resources>

@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.view.MenuItem;
 
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
@@ -51,6 +52,9 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         if(getIntent() != null){
             if(getIntent().hasExtra(HISTORY_KEY)){
@@ -206,6 +210,16 @@ public class MeasurePressureDetailActivity extends BaseActivity<MeasurePressureD
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public MeasurePressureDetailViewModel getViewModel() {

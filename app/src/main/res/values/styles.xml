@@ -61,21 +61,22 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
-    <style name="ListItemClickable">
-        <item name="android:background">@drawable/list_item_clickable_background</item>
-    </style>
-
-    <style name="ListItemNonClickable">
-        <item name="android:background">@drawable/list_item_nonclickable_background</item>
-    </style>
-
     <style name="ListItemTitle">
         <item name="android:textColor">@android:color/white</item>
-        android:textColor="@android:color/white"
-        android:fontFamily="sans-serif-medium"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textSize="@dimen/list_item_title_size"
-        android:paddingBottom="@dimen/small_vertical_margin"
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/list_item_title_size</item>
+    </style>
+
+    <style name="ClickableCard">
+        <item name="cardCornerRadius">0dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="contentPadding">0dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:focusable">true</item>
     </style>
 </resources>

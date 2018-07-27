@@ -2,7 +2,7 @@
 
 
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="?attr/colorControlHighlight"
+    android:color="?android:attr/colorControlHighlight"
     android:exitFadeDuration="@android:integer/config_shortAnimTime">
     <item>
         <selector xmlns:android="http://schemas.android.com/apk/res/android">
@@ -35,7 +35,7 @@
                 <inset xmlns:android="http://schemas.android.com/apk/res/android">
                     <shape android:shape="rectangle">
                         <corners android:bottomLeftRadius="@dimen/control_corner_material" android:bottomRightRadius="@dimen/control_corner_material" android:topLeftRadius="@dimen/control_corner_material" android:topRightRadius="@dimen/control_corner_material" />
-                        <solid android:color="?attr/colorControlHighlight" />
+                        <solid android:color="?android:attr/colorControlHighlight" />
                         <padding android:bottom="@dimen/button_padding_vertical_material" android:left="@dimen/button_padding_horizontal_material" android:right="@dimen/button_padding_horizontal_material" android:top="@dimen/button_padding_vertical_material" />
                         <corners android:bottomRightRadius="@dimen/button_corner" android:bottomLeftRadius="@dimen/button_corner" android:topRightRadius="@dimen/button_corner" android:topLeftRadius="@dimen/button_corner"/>
                     </shape>

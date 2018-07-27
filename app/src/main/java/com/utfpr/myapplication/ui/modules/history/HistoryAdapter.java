@@ -2,6 +2,7 @@ package com.utfpr.myapplication.ui.modules.history;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -28,7 +29,7 @@ public class HistoryAdapter extends BaseQuickAdapter<History, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, History item) {
-        helper.addOnClickListener(R.id.backgroud_view);
+
 
         helper.setText(R.id.day_number_textview, mDayFormatter.format(item.getCreatedAt()))
                 .setText(R.id.month_name_textview, mMonthFormatter.format(item.getCreatedAt()).toUpperCase())
@@ -38,6 +39,14 @@ public class HistoryAdapter extends BaseQuickAdapter<History, BaseViewHolder> {
                         mTimeFormatter.format(item.getCreatedAt()),
                         StringUtils.getResultType(mContext, item.getResult())));
 
-        //TODO add touch feedback - ripple mutiple styles
+
+        if(item.getType().equalsIgnoreCase(StringUtils.FOOT_SCAN_TYPE)){
+            View view = helper.getView(R.id.root_cardview);
+            view.setEnabled(false);
+            view.setClickable(false);
+            view.setFocusable(false);
+        }else {
+            helper.addOnClickListener(R.id.backgroud_view);
+        }
     }
 }
