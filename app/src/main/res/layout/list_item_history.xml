@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/extra_small_vertical_spacing"
+    android:paddingTop="@dimen/extra_small_vertical_spacing">
+
+    <TextView
+        android:id="@+id/day_number_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/heavy_horizontal_spacing"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="25" />
+
+    <TextView
+        android:id="@+id/month_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/day_number_textview"
+        app:layout_constraintTop_toBottomOf="@id/day_number_textview"
+        tools:text="Jul" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/backgroud_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/medium_vertical_spacing"
+        android:layout_marginStart="@dimen/medium_horizontal_spacing"
+        style="@style/ClickableCard"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/day_number_textview"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:background="@drawable/list_item_clickable_background"
+            android:id="@+id/root_cardview"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/scan_type_textview"
+                style="@style/ListItemTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/small_horizontal_spacing"
+                android:layout_marginStart="@dimen/small_horizontal_spacing"
+                android:paddingTop="@dimen/small_vertical_spacing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Exame de pressão" />
+
+            <TextView
+                android:id="@+id/scan_fulldate_textview"
+                style="@style/ListItemTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/small_horizontal_spacing"
+                android:layout_marginStart="@dimen/small_horizontal_spacing"
+                android:paddingBottom="@dimen/small_vertical_spacing"
+                tools:text="@string/history_second_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scan_type_textview" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

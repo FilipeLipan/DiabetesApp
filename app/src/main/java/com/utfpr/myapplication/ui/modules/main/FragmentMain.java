@@ -37,6 +37,8 @@ public class FragmentMain extends BaseFragment<MainFragmentViewModel, FragmentMa
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        getBaseActivity().setTitle(getString(R.string.title_home));
+
         getDataBind().logoutButton.setOnClickListener( v ->{
             FirebaseAuth.getInstance().signOut();
             LoginActivity.launchAndClearTop(getContext());

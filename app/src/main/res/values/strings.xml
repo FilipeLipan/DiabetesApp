@@ -11,4 +11,20 @@
     <string name="foot_scan">Scan de pé</string>
     <string name="click_to_take_picture">Clique para tirar foto</string>
     <string name="cant_load_photo">Não foi possivel carregar a foto</string>
+    <string name="beats_per_minute">Batimentos por minuto</string>
+    <string name="history">Histórico</string>
+    <string name="measuring_pressure">Medir pressão</string>
+    <string name="grafico_do_exame">Gráfico do exame</string>
+    <string name="result">Resultado:</string>
+    <string name="measure_pressure_detail">Detalhes do exame de pressão</string>
+    <string name="heart_beat_exam">Exame de pressão</string>
+    <string name="history_second_label">%1$s - %2$s</string>
+    <string name="detected">Detectado</string>
+    <string name="normal">Normal</string>
+    <string name="what_to_do_now">O quê fazer agora?</string>
+    <string name="normal_what_to_do_text" />
+    <string name="detected_what_to_do_text" />
+    <string name="heart_pressure_tutorial">Coloque a ponta do dedo em cima da lanterna e apoie seu dedo na câmera. \n O teste vai começar quando forem detectados os primeiros batimentos</string>
+    <string name="empty_beat_per_minute">000</string>
+    <string name="restart_process">Reiniciar processo</string>
 </resources>

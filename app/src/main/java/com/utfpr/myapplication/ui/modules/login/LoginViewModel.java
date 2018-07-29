@@ -2,7 +2,6 @@ package com.utfpr.myapplication.ui.modules.login;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 
 import com.utfpr.myapplication.data.FirebaseTutorialManager;
 import com.utfpr.myapplication.data.FirebaseUserManager;
@@ -10,6 +9,7 @@ import com.utfpr.myapplication.data.UserNotFoundException;
 import com.utfpr.myapplication.data.local.LocalPreferences;
 import com.utfpr.myapplication.data.local.UserPreferences;
 import com.utfpr.myapplication.models.User;
+import com.utfpr.myapplication.ui.common.BaseViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialItem;
 
 import java.util.List;
@@ -27,19 +27,19 @@ import io.reactivex.schedulers.Schedulers;
  * Created by lispa on 25/03/2018.
  */
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends BaseViewModel {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private MutableLiveData<List<TutorialItem>> tutorialItemLivedata = new MutableLiveData<>();
     private MutableLiveData<Boolean> goToMainActivityLiveData = new MutableLiveData<Boolean>();
 
-    private LocalPreferences localPreferences;
-    private UserPreferences userPreferences;
+    private LocalPreferences mLocalPreferences;
+    private UserPreferences mUserPreferences;
 
     @Inject
     public LoginViewModel(LocalPreferences localPreferences, UserPreferences userPreferences){
-        this.userPreferences = userPreferences;
-        this.localPreferences = localPreferences;
+        this.mUserPreferences = userPreferences;
+        this.mLocalPreferences = localPreferences;
     }
 
     public LiveData<List<TutorialItem>> getTutorialItemLivedata() {
@@ -80,7 +80,8 @@ public class LoginViewModel extends ViewModel {
                 .subscribeWith(new DisposableObserver<User>() {
                     @Override
                     public void onNext(User user) {
-                        if(localPreferences.didSawTutorial()){
+                        mUserPreferences.saveUser(userId, user);
+                        if(mLocalPreferences.didSawTutorial()){
                             goToMainActivityLiveData.setValue(true);
                         }else {
                             loadTutorial();

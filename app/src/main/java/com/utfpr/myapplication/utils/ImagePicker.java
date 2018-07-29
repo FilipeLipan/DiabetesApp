@@ -48,6 +48,14 @@ public class ImagePicker {
         return bm;
     }
 
+    public static Bitmap getImageBitmap(Context context, String uri) {
+        Uri selectedImage = Uri.parse(uri);
+        Bitmap bm = getImageResized(context, Uri.parse(uri));
+        int rotation = getRotation(context, selectedImage, true);
+        bm = rotate(bm, rotation);
+        return bm;
+    }
+
 
     private static Bitmap decodeBitmap(Context context, Uri theUri, int sampleSize) {
         BitmapFactory.Options options = new BitmapFactory.Options();

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/result_label_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/screen_title_spacing"
+                android:fontFamily="sans-serif-medium"
+                android:paddingBottom="@dimen/screen_title_spacing"
+                android:text="@string/result"
+                android:textSize="@dimen/screen_title"
+                android:paddingEnd="@dimen/small_horizontal_spacing"
+                android:paddingStart="@dimen/small_horizontal_spacing"
+                app:layout_constraintEnd_toEndOf="@id/guideline_center_horizontal"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/result_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="sans-serif-medium"
+                tools:text="Em risco"
+                android:textSize="@dimen/screen_title"
+                app:layout_constraintStart_toStartOf="@id/guideline_center_horizontal"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/chart_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/result_label_textview" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/what_do_now_label_textview"
+                android:text="@string/what_to_do_now"
+                android:textSize="@dimen/subtitle_size"
+                android:fontFamily="sans-serif-medium"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/heavy_horizontal_spacing"
+                android:layout_marginTop="@dimen/medium_vertical_spacing"
+                app:layout_constraintTop_toBottomOf="@id/chart"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/what_do_now_textview"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id libero faucibus, mollis neque faucibus, luctus libero. Morbi sollicitudin tristique tortor. Mauris aliquet mi vitae ligula sodales auctor. Nunc ac fermentum lacus, nec scelerisque augue. Maecenas rutrum massa dui, nec feugiat massa aliquet quis. Integer elementum neque enim, eu volutpat tellus lacinia vitae. Donec egestas orci aliquet tellus ultricies, sed vulputate quam commodo."
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="@dimen/heavy_horizontal_spacing"
+                android:layout_marginStart="@dimen/heavy_horizontal_spacing"
+                android:layout_marginTop="@dimen/medium_vertical_spacing"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingBottom="@dimen/bottom_pading"
+                app:layout_constraintTop_toBottomOf="@id/what_do_now_label_textview"/>
+
+            <android.support.constraint.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline_center_horizontal"
+                app:layout_constraintGuide_percent="0.5"
+                android:orientation="vertical"/>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</layout>

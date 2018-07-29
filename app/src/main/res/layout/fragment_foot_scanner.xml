@@ -12,18 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/result_textview"
-        app:layout_constraintBottom_toTopOf="@id/cropImageView"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        tools:text="Detectado"
+        app:layout_constraintBottom_toTopOf="@id/photo_ImageView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.theartofdev.edmodo.cropper.CropImageView
-        android:id="@+id/cropImageView"
+    <ImageView
+        android:id="@+id/photo_ImageView"
         android:layout_width="@dimen/foot_scanner_image_size"
-        android:layout_height="0dp"
-        android:maxHeight="210dp"
-        tools:layout_height="210dp"
+        android:layout_height="@dimen/foot_scanner_image_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,17 +35,18 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/click_to_take_picture_include"
-        layout="@layout/include_take_picture"
-        app:layout_constraintEnd_toEndOf="@id/cropImageView"
-        app:layout_constraintStart_toStartOf="@id/cropImageView"
-        app:layout_constraintTop_toTopOf="@id/cropImageView"
-        app:layout_constraintBottom_toBottomOf="@id/cropImageView"/>
+        layout="@layout/include_take_photo"
+        app:layout_constraintEnd_toEndOf="@id/photo_ImageView"
+        app:layout_constraintStart_toStartOf="@id/photo_ImageView"
+        app:layout_constraintTop_toTopOf="@id/photo_ImageView"
+        app:layout_constraintBottom_toBottomOf="@id/photo_ImageView"/>
 
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressbar"
+    <include
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/loading_include"
+        layout="@layout/include_loading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,15 +55,14 @@
     <Button
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/scan"
-        android:id="@+id/scan_button"
-        style="@style/AccentButton"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
+        android:text="@string/click_to_take_picture"
+        android:id="@+id/take_photo_button"
+        style="@style/AccentReverseButton"
+        android:layout_marginBottom="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
 </layout>

@@ -7,12 +7,15 @@ import dagger.multibindings.IntoMap;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
+import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailViewModel;
 import com.utfpr.myapplication.ui.modules.login.LoginViewModel;
 import com.utfpr.myapplication.ui.MainViewModel;
 import com.utfpr.myapplication.ui.common.ViewModelProviderFactory;
 import com.utfpr.myapplication.di.ViewModelKey;
 import com.utfpr.myapplication.ui.modules.foot_scanner.FootScannerViewModel;
 import com.utfpr.myapplication.ui.modules.main.MainFragmentViewModel;
+import com.utfpr.myapplication.ui.modules.measuring_pressure.MeasuringPressureViewModel;
+import com.utfpr.myapplication.ui.modules.history.HistoryViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialItemViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialViewModel;
 
@@ -30,7 +33,6 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel.class)
     abstract ViewModel bindLoginViewModel(LoginViewModel var1);
-
 
     @Binds
     @IntoMap
@@ -56,4 +58,19 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FootScannerViewModel.class)
     abstract ViewModel bindFootScannerViewModel(FootScannerViewModel var1);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MeasuringPressureViewModel.class)
+    abstract ViewModel bindMeasuringPressureViewModel(MeasuringPressureViewModel var1);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HistoryViewModel.class)
+    abstract ViewModel bindHistoryViewModel(HistoryViewModel var1);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MeasurePressureDetailViewModel.class)
+    abstract ViewModel bindMeasurePressureDetailViewModel(MeasurePressureDetailViewModel var1);
 }
