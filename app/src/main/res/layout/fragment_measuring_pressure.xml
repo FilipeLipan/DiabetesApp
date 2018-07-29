@@ -98,9 +98,9 @@
                     android:id="@+id/tutorial_imageview"
                     android:layout_width="@dimen/measure_pressure_tutorial_image"
                     android:layout_height="@dimen/measure_pressure_tutorial_image"
+                    android:src="@drawable/tutorial_pressure"
                     android:contentDescription="@string/heart_pressure_tutorial"
                     android:layout_marginTop="@dimen/screen_title_spacing"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -115,7 +115,6 @@
                     android:layout_marginEnd="@dimen/heavy_horizontal_spacing"
                     android:layout_marginStart="@dimen/heavy_horizontal_spacing"
                     android:textAlignment="center"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tutorial_imageview" />
