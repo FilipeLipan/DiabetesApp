@@ -55,7 +55,7 @@
                 android:fontFamily="sans-serif-medium"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/heavy_horizontal_spacing"
-                android:layout_marginTop="@dimen/medium_vertical_margin"
+                android:layout_marginTop="@dimen/medium_vertical_spacing"
                 app:layout_constraintTop_toBottomOf="@id/chart"/>
 
             <TextView
@@ -66,7 +66,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginEnd="@dimen/heavy_horizontal_spacing"
                 android:layout_marginStart="@dimen/heavy_horizontal_spacing"
-                android:layout_marginTop="@dimen/medium_vertical_margin"
+                android:layout_marginTop="@dimen/medium_vertical_spacing"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingBottom="@dimen/bottom_pading"
                 app:layout_constraintTop_toBottomOf="@id/what_do_now_label_textview"/>

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/extra_small_vertical_margin"
-    android:paddingTop="@dimen/extra_small_vertical_margin">
+    android:paddingBottom="@dimen/extra_small_vertical_spacing"
+    android:paddingTop="@dimen/extra_small_vertical_spacing">
 
     <TextView
         android:id="@+id/day_number_textview"
@@ -30,7 +30,7 @@
         android:id="@+id/backgroud_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/medium_vertical_margin"
+        android:layout_marginEnd="@dimen/medium_vertical_spacing"
         android:layout_marginStart="@dimen/medium_horizontal_spacing"
         style="@style/ClickableCard"
 
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/small_horizontal_spacing"
                 android:layout_marginStart="@dimen/small_horizontal_spacing"
-                android:paddingTop="@dimen/small_vertical_margin"
+                android:paddingTop="@dimen/small_vertical_spacing"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/small_horizontal_spacing"
                 android:layout_marginStart="@dimen/small_horizontal_spacing"
-                android:paddingBottom="@dimen/small_vertical_margin"
+                android:paddingBottom="@dimen/small_vertical_spacing"
                 tools:text="@string/history_second_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
