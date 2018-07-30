@@ -16,7 +16,6 @@ import android.view.View;
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.databinding.FragmentFootScannerBinding;
 import com.utfpr.myapplication.ui.common.BaseFragment;
-import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailActivity;
 import com.utfpr.myapplication.utils.ImagePicker;
 
 public class FootScannerFragment extends BaseFragment<FootScannerViewModel, FragmentFootScannerBinding> {
@@ -52,7 +51,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
         setUpClickListeners();
     }
 
-    private void observeViewModel(){
+    private void observeViewModel() {
         getViewModel().getScanResult().observe(this, observer -> {
             if (observer != null) {
                 if (observer) {
@@ -65,32 +64,33 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
 
     }
 
-    private void setUpClickListeners(){
+    private void setUpClickListeners() {
         getDataBind().clickToTakePictureInclude.setOnClickListener(v -> checkPermissionAndStartPicture());
         getDataBind().takePhotoButton.setOnClickListener(v -> checkPermissionAndStartPicture());
-        getDataBind().loadingInclude.getRootView().setOnClickListener(view -> {});
+        getDataBind().loadingInclude.getRootView().setOnClickListener(view -> {
+        });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-                if (resultCode == Activity.RESULT_OK) {
-                        if (requestCode == PICK_USER_PROFILE_IMAGE) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_USER_PROFILE_IMAGE) {
 
-                            getDataBind().clickToTakePictureInclude.setVisibility(View.INVISIBLE);
-                            Bitmap bitmap = ImagePicker.getImageFromResult(getContext(), resultCode, data);
-                                    getViewModel().startScanning(bitmap);
-                                    getDataBind().photoImageView.setImageBitmap(bitmap);
-                          }
-                   }
+                getDataBind().clickToTakePictureInclude.setVisibility(View.INVISIBLE);
+                Bitmap bitmap = ImagePicker.getImageFromResult(getContext(), resultCode, data);
+                getViewModel().startScanning(bitmap);
+                getDataBind().photoImageView.setImageBitmap(bitmap);
+            }
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(requestCode == CAMERA_PERMISSION){
+        if (requestCode == CAMERA_PERMISSION) {
             if (permissions[0].equals(Manifest.permission.CAMERA)
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startCameraActivity();
@@ -102,7 +102,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
     private void checkPermissionAndStartPicture() {
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),
+            requestPermissions(
                     new String[]{android.Manifest.permission.CAMERA},
                     CAMERA_PERMISSION);
         } else {
@@ -112,11 +112,11 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
 
 
     public void startCameraActivity() {
-              Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-              if (cameraIntent.resolveActivity(getContext().getPackageManager()) != null) {
-                      startActivityForResult(cameraIntent, PICK_USER_PROFILE_IMAGE);
-                 }
-            }
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(getContext().getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, PICK_USER_PROFILE_IMAGE);
+        }
+    }
 
     @Override
     public void showLoading() {
