@@ -65,7 +65,7 @@ public class FragmentMain extends BaseFragment<MainFragmentViewModel, FragmentMa
     private void observeLiveData() {
         getViewModel().getNewsMutableLiveData().observe(this, allNews -> {
             if(allNews != null){
-                mAdapter.setNewData(new ArrayList<>());
+                mAdapter.setNewData(allNews);
                 mAdapter.setEmptyView(ViewUtils.inflateView(getActivity(), R.layout.empty_list_view));
             }
         });
