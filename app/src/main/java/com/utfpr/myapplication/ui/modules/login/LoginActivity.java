@@ -22,11 +22,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.utfpr.myapplication.ui.MainActivity;
 import com.utfpr.myapplication.R;
-import com.utfpr.myapplication.ui.common.BaseActivity;
 import com.utfpr.myapplication.databinding.ActivityLoginBinding;
 import com.utfpr.myapplication.models.User;
+import com.utfpr.myapplication.ui.MainActivity;
+import com.utfpr.myapplication.ui.common.BaseActivity;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialActivity;
 
 /**

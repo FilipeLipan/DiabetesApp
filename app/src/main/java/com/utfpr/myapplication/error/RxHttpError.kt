@@ -1,10 +1,9 @@
 package com.utfpr.myapplication.error
 
 import com.google.gson.Gson
-import java.io.IOException
-import java.util.HashMap
-
 import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
 
 
 class RxHttpError private constructor() {

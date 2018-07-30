@@ -1,7 +1,5 @@
 package com.utfpr.myapplication.error
 
-import com.utfpr.myapplication.error.RxHttpError
-
 /**
  * Created by lispa on 20/12/2017.
  */

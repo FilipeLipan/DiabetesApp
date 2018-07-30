@@ -15,7 +15,6 @@ import android.view.View;
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.databinding.FragmentFootScannerBinding;
 import com.utfpr.myapplication.ui.common.BaseFragment;
-import com.utfpr.myapplication.ui.common.BaseFragmentActivity;
 import com.utfpr.myapplication.utils.ImagePicker;
 
 public class FootScannerFragment extends BaseFragment<FootScannerViewModel, FragmentFootScannerBinding> {

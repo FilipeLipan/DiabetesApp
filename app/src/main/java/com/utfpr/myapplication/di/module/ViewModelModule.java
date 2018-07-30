@@ -1,23 +1,23 @@
 package com.utfpr.myapplication.di.module;
 
-import dagger.Binds;
-import dagger.Module;
-import dagger.multibindings.IntoMap;
-
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailViewModel;
-import com.utfpr.myapplication.ui.modules.login.LoginViewModel;
+import com.utfpr.myapplication.di.ViewModelKey;
 import com.utfpr.myapplication.ui.MainViewModel;
 import com.utfpr.myapplication.ui.common.ViewModelProviderFactory;
-import com.utfpr.myapplication.di.ViewModelKey;
 import com.utfpr.myapplication.ui.modules.foot_scanner.FootScannerViewModel;
+import com.utfpr.myapplication.ui.modules.history.HistoryViewModel;
+import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailViewModel;
+import com.utfpr.myapplication.ui.modules.login.LoginViewModel;
 import com.utfpr.myapplication.ui.modules.main.MainFragmentViewModel;
 import com.utfpr.myapplication.ui.modules.measuring_pressure.MeasuringPressureViewModel;
-import com.utfpr.myapplication.ui.modules.history.HistoryViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialItemViewModel;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialViewModel;
+
+import dagger.Binds;
+import dagger.Module;
+import dagger.multibindings.IntoMap;
 
 /**
  * Created by lispa on 31/03/2018.

@@ -3,8 +3,6 @@ package com.utfpr.myapplication.data.local;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.utfpr.myapplication.models.User;
-
 /**
  * Created by lispa on 20/05/2018.
  */

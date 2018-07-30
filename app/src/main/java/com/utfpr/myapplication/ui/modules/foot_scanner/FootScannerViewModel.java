@@ -18,13 +18,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-
-import javax.inject.Inject;
 
 
 /**

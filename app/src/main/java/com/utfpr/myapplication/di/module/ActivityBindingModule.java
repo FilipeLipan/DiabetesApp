@@ -1,8 +1,8 @@
 package com.utfpr.myapplication.di.module;
 
+import com.utfpr.myapplication.ui.MainActivity;
 import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailActivity;
 import com.utfpr.myapplication.ui.modules.login.LoginActivity;
-import com.utfpr.myapplication.ui.MainActivity;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialActivity;
 
 import dagger.Module;

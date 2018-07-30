@@ -6,6 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.utfpr.myapplication.models.News;
 
 import java.util.List;
+
 import io.reactivex.Observable;
 
 /**

@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.google.api.client.util.DateTime;
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.models.History;
 import com.utfpr.myapplication.utils.StringUtils;

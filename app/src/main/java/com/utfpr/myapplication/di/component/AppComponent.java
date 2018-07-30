@@ -5,11 +5,9 @@ import android.app.Application;
 import com.utfpr.myapplication.app.App;
 import com.utfpr.myapplication.di.module.ActivityBindingModule;
 import com.utfpr.myapplication.di.module.AppModule;
-import com.utfpr.myapplication.di.module.FragmentBindingModule;
 import com.utfpr.myapplication.di.module.ViewModelModule;
 
 import javax.inject.Singleton;
-
 
 import dagger.BindsInstance;
 import dagger.Component;

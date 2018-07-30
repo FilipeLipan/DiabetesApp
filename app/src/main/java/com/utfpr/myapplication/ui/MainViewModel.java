@@ -1,7 +1,5 @@
 package com.utfpr.myapplication.ui;
 
-import android.arch.lifecycle.ViewModel;
-
 import com.utfpr.myapplication.ui.common.BaseViewModel;
 
 import javax.inject.Inject;

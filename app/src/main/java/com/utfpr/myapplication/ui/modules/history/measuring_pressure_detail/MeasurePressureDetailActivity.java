@@ -22,10 +22,10 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.utfpr.myapplication.R;
+import com.utfpr.myapplication.databinding.ActivityMeasurePressureDetailBinding;
 import com.utfpr.myapplication.models.History;
 import com.utfpr.myapplication.models.HistoryChartEntry;
 import com.utfpr.myapplication.ui.common.BaseActivity;
-import com.utfpr.myapplication.databinding.ActivityMeasurePressureDetailBinding;
 import com.utfpr.myapplication.utils.ColorUtils;
 import com.utfpr.myapplication.utils.StringUtils;
 

@@ -8,7 +8,6 @@ import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.databinding.FragmentMainBinding;
-import com.utfpr.myapplication.ui.MainViewModel;
 import com.utfpr.myapplication.ui.common.BaseFragment;
 import com.utfpr.myapplication.ui.modules.login.LoginActivity;
 

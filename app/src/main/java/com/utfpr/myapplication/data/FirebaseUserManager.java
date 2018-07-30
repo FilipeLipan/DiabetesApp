@@ -10,7 +10,6 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by lispa on 02/04/2018.
