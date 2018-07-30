@@ -5,12 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.databinding.FragmentMainBinding;
-import com.utfpr.myapplication.ui.MainViewModel;
 import com.utfpr.myapplication.ui.common.BaseFragment;
-import com.utfpr.myapplication.ui.modules.login.LoginActivity;
 
 public class FragmentMain extends BaseFragment<MainFragmentViewModel, FragmentMainBinding> {
 
@@ -39,9 +36,9 @@ public class FragmentMain extends BaseFragment<MainFragmentViewModel, FragmentMa
 
         getBaseActivity().setTitle(getString(R.string.title_home));
 
-        getDataBind().logoutButton.setOnClickListener( v ->{
-            FirebaseAuth.getInstance().signOut();
-            LoginActivity.launchAndClearTop(getContext());
-        });
+//        getDataBind().logoutButton.setOnClickListener( v ->{
+//            FirebaseAuth.getInstance().signOut();
+//            LoginActivity.launchAndClearTop(getContext());
+//        });
     }
 }

@@ -11,11 +11,18 @@ import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
 import com.google.api.services.vision.v1.model.WebDetection;
 import com.google.api.services.vision.v1.model.WebEntity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.utfpr.myapplication.data.FirebaseUserManager;
+import com.utfpr.myapplication.livedata_resources.SingleLiveEvent;
+import com.utfpr.myapplication.models.History;
+import com.utfpr.myapplication.models.HistoryChartEntry;
 import com.utfpr.myapplication.ui.common.BaseViewModel;
+import com.utfpr.myapplication.utils.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 
 import io.reactivex.Observable;
@@ -35,27 +42,31 @@ public class FootScannerViewModel extends BaseViewModel {
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    MutableLiveData<Boolean> scanResult = new MutableLiveData<Boolean>();
+    private MutableLiveData<Boolean> scanResult = new MutableLiveData<Boolean>();
+    private SingleLiveEvent<String> createdHistoryIdLiveData = new SingleLiveEvent<>();
 
     private Vision vision;
 
     @Inject
-    public FootScannerViewModel(Vision vision){
+    public FootScannerViewModel(Vision vision) {
         this.vision = vision;
     }
 
+    public SingleLiveEvent<String> getCreatedHistoryIdLiveData() {
+        return createdHistoryIdLiveData;
+    }
 
     public MutableLiveData<Boolean> getScanResult() {
         return scanResult;
     }
 
-    public void startScanning(Bitmap bitmap){
+    public void startScanning(Bitmap bitmap) {
         showLoading();
 
         compositeDisposable.clear();
         compositeDisposable.dispose();
 
-            scanBitmap(bitmap)
+        addDisposable(scanBitmap(bitmap)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<Boolean>() {
@@ -63,6 +74,7 @@ public class FootScannerViewModel extends BaseViewModel {
                     public void onNext(Boolean aBoolean) {
                         hideLoading();
                         scanResult.setValue(aBoolean);
+                        createHistory(aBoolean);
                     }
 
                     @Override
@@ -73,9 +85,9 @@ public class FootScannerViewModel extends BaseViewModel {
 
                     @Override
                     public void onComplete() {
-
+                        //ignore
                     }
-                });
+                }));
     }
 
 
@@ -126,6 +138,39 @@ public class FootScannerViewModel extends BaseViewModel {
                 emitter.onError(e);
             }
         });
+    }
+
+
+    private void createHistory(boolean wasDetected){
+        showLoading();
+
+        History history = new History()
+                .setCreatedAt(Calendar.getInstance().getTime())
+                .setResult(wasDetected ? StringUtils.RESULT_DETECTED_TYPE : StringUtils.RESULT_NORMAL_DETECTED_TYPE)
+                .setType(StringUtils.FOOT_SCAN_TYPE)
+                .setEntries(new ArrayList<>());
+
+        addDisposable(FirebaseUserManager.createHistory(FirebaseAuth.getInstance().getUid(), history)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<String>() {
+                    @Override
+                    public void onNext(String historyId) {
+                        hideLoading();
+                        createdHistoryIdLiveData.setValue(historyId);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        hideLoading();
+                        //ignore
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        //ignore
+                    }
+                }));
     }
 
     @Override

@@ -10,12 +10,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.databinding.FragmentFootScannerBinding;
 import com.utfpr.myapplication.ui.common.BaseFragment;
-import com.utfpr.myapplication.ui.common.BaseFragmentActivity;
+import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailActivity;
 import com.utfpr.myapplication.utils.ImagePicker;
 
 public class FootScannerFragment extends BaseFragment<FootScannerViewModel, FragmentFootScannerBinding> {
@@ -61,11 +62,13 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
                 }
             }
         });
+
     }
 
     private void setUpClickListeners(){
         getDataBind().clickToTakePictureInclude.setOnClickListener(v -> checkPermissionAndStartPicture());
         getDataBind().takePhotoButton.setOnClickListener(v -> checkPermissionAndStartPicture());
+        getDataBind().loadingInclude.getRootView().setOnClickListener(view -> {});
     }
 
     @Override
@@ -97,15 +100,13 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
 
 
     private void checkPermissionAndStartPicture() {
-        if (ActivityCompat.checkSelfPermission(getContext(),
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(getContext(),
-                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            startCameraActivity();
-        } else {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{android.Manifest.permission.CAMERA},
                     CAMERA_PERMISSION);
+        } else {
+            startCameraActivity();
         }
     }
 

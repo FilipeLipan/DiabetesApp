@@ -109,6 +109,10 @@ public class MeasuringPressureViewModel extends BaseViewModel {
             beats++;
             beatLog.add(System.currentTimeMillis());
             Log.d(TAG, "BEAT!! beats="+beats);
+            if(beatLog.size() == BEAT_LOG_MAXIMUM_ARRAY_SIZE){
+                isProcessingMutableLivedata.setValue(false);
+                createHistory();
+            }
         }
 
         if (averageIndex == AVERAGE_ARRAY_SIZE) averageIndex = 0;
@@ -148,9 +152,6 @@ public class MeasuringPressureViewModel extends BaseViewModel {
             beats = 0;
         }
 
-        if(beatLog.size() == BEAT_LOG_MAXIMUM_ARRAY_SIZE){
-            isProcessingMutableLivedata.setValue(false);
-        }
 
         processing.set(false);
     }
