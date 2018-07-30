@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -125,6 +126,10 @@ public abstract class BaseFragmentActivity<V extends BaseViewModel, B extends Vi
                     hideLoading();
                 }
             }
+        });
+
+        getViewModel().getError().observe(this , error -> {
+            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
         });
     }
 

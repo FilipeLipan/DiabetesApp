@@ -51,6 +51,7 @@ public class MainFragmentViewModel extends BaseViewModel {
                             @Override
                             public void onError(Throwable e) {
                                 hideLoading();
+                                showError(e);
                             }
 
                             @Override

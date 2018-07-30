@@ -192,7 +192,7 @@ public class MeasuringPressureViewModel extends BaseViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        //ignore
+                        showError(e);
                     }
 
                     @Override

@@ -68,6 +68,7 @@ public class LoginViewModel extends BaseViewModel {
 
                             @Override
                             public void onError(Throwable e) {
+                                showError(e);
                                 hideLoading();
                             }
 
@@ -101,6 +102,8 @@ public class LoginViewModel extends BaseViewModel {
                         hideLoading();
                         if(e instanceof UserNotFoundException){
                             createUser(userId, user);
+                        }else {
+                            showError(e);
                         }
                     }
 
@@ -129,6 +132,7 @@ public class LoginViewModel extends BaseViewModel {
                     @Override
                     public void onError(Throwable e) {
                         hideLoading();
+                        showError(e);
                     }
                 });
     }

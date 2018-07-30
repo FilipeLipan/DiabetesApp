@@ -33,8 +33,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class FootScannerViewModel extends BaseViewModel {
 
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     MutableLiveData<Boolean> scanResult = new MutableLiveData<Boolean>();
 
     private Vision vision;
@@ -52,10 +50,10 @@ public class FootScannerViewModel extends BaseViewModel {
     public void startScanning(Bitmap bitmap){
         showLoading();
 
-        compositeDisposable.clear();
-        compositeDisposable.dispose();
+        getCompositeDisposable().clear();
+        getCompositeDisposable().dispose();
 
-            scanBitmap(bitmap)
+            addDisposable(scanBitmap(bitmap)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<Boolean>() {
@@ -69,13 +67,14 @@ public class FootScannerViewModel extends BaseViewModel {
                     public void onError(Throwable e) {
                         hideLoading();
                         scanResult.setValue(false);
+                        showError(e);
                     }
 
                     @Override
                     public void onComplete() {
 
                     }
-                });
+                }));
     }
 
 
@@ -128,12 +127,6 @@ public class FootScannerViewModel extends BaseViewModel {
         });
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        compositeDisposable.clear();
-        compositeDisposable.dispose();
-    }
 
 
 }

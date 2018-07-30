@@ -4,13 +4,13 @@ package com.utfpr.myapplication.ui.common;
  * Created by lispa on 24/03/2018.
  */
 
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.utfpr.myapplication.di.ActivityInjectable;
 
@@ -53,6 +53,10 @@ public abstract class BaseActivity<V extends BaseViewModel, B extends ViewDataBi
                     hideLoading();
                 }
             }
+        });
+
+        getViewModel().getError().observe(this , error -> {
+            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
         });
     }
 
