@@ -16,7 +16,7 @@ import com.utfpr.myapplication.di.ActivityInjectable;
 
 import javax.inject.Inject;
 
-public abstract class BaseActivity<V extends ViewModel, B extends ViewDataBinding> extends AppCompatActivity implements ActivityInjectable {
+public abstract class BaseActivity<V extends BaseViewModel, B extends ViewDataBinding> extends AppCompatActivity implements ActivityInjectable {
 
     @Inject
     ViewModelProvider.Factory mViewModelFactory;
@@ -32,6 +32,7 @@ public abstract class BaseActivity<V extends ViewModel, B extends ViewDataBindin
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getActivityLayout());
 
+        observeViewModel();
     }
 
     public B getDataBind() {
@@ -42,4 +43,24 @@ public abstract class BaseActivity<V extends ViewModel, B extends ViewDataBindin
         return this.mViewModelFactory;
     }
 
+
+    private void observeViewModel(){
+        getViewModel().getLoading().observe(this, isLoading -> {
+            if (isLoading != null) {
+                if (isLoading) {
+                    showLoading();
+                } else {
+                    hideLoading();
+                }
+            }
+        });
+    }
+
+    public void showLoading(){
+
+    }
+
+    public void hideLoading(){
+
+    }
 }

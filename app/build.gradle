@@ -25,6 +25,16 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
+
+    signingConfigs {
+        release {
+            storeFile file('key.jks')
+            storePassword '5a6b7c8d9e'
+            keyAlias 'KeyAlias'
+            keyPassword '@Keypasswor'
+        }
+    }
+
     buildTypes {
 
         debug {

@@ -36,5 +36,7 @@
     <dimen name="measuring_pressure_surfaceview_size">180dp</dimen>
     <dimen name="beat_per_minute_size">80sp</dimen>
     <dimen name="news_card_size">140dp</dimen>
+    <dimen name="google_button_logo_size">18dp</dimen>
+    <dimen name="login_image_size">150dp</dimen>
 
 </resources>

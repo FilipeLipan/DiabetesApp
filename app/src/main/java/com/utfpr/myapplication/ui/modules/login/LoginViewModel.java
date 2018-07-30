@@ -29,7 +29,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LoginViewModel extends BaseViewModel {
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private MutableLiveData<List<TutorialItem>> tutorialItemLivedata = new MutableLiveData<>();
     private MutableLiveData<Boolean> goToMainActivityLiveData = new MutableLiveData<Boolean>();
     private final FirebaseTutorialManager firebaseTutorialManager;
@@ -55,18 +54,21 @@ public class LoginViewModel extends BaseViewModel {
     }
 
     private void loadTutorial(){
-        compositeDisposable.add(
+        showLoading();
+        addDisposable(
                 firebaseTutorialManager.getAll()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableObserver<List<TutorialItem>>() {
                             @Override
                             public void onNext(List<TutorialItem> tutorialItems) {
+                                hideLoading();
                                 tutorialItemLivedata.setValue(tutorialItems);
                             }
 
                             @Override
                             public void onError(Throwable e) {
+                                hideLoading();
                             }
 
                             @Override
@@ -77,7 +79,8 @@ public class LoginViewModel extends BaseViewModel {
 
 
     public void loadUser(String userId, User user){
-        compositeDisposable.add(
+        showLoading();
+        addDisposable(
                 firebaseUserManager.getUser(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -90,10 +93,12 @@ public class LoginViewModel extends BaseViewModel {
                         }else {
                             loadTutorial();
                         }
+                        hideLoading();
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        hideLoading();
                         if(e instanceof UserNotFoundException){
                             createUser(userId, user);
                         }
@@ -105,28 +110,26 @@ public class LoginViewModel extends BaseViewModel {
     }
 
     private void createUser(String userId, User user){
+        showLoading();
         firebaseUserManager.createUser(userId, user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        compositeDisposable.add(d);
+                        addDisposable(d);
                     }
 
                     @Override
                     public void onComplete() {
+                        hideLoading();
                         loadUser(userId, user);
                     }
 
                     @Override
-                    public void onError(Throwable e) { }
+                    public void onError(Throwable e) {
+                        hideLoading();
+                    }
                 });
-    }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        compositeDisposable.dispose();
     }
 }
