@@ -38,5 +38,7 @@
     <dimen name="news_card_size">140dp</dimen>
     <dimen name="google_button_logo_size">18dp</dimen>
     <dimen name="login_image_size">150dp</dimen>
+    <dimen name="tutorial_title_size">30sp</dimen>
+    <dimen name="tutorial_description_size">16sp</dimen>
 
 </resources>
