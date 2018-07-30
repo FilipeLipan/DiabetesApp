@@ -34,7 +34,7 @@ public class MainFragmentViewModel extends BaseViewModel {
         return newsMutableLiveData;
     }
 
-    private void getAllNews(){
+    public void getAllNews(){
         showLoading();
 
         addDisposable(

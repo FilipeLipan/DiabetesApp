@@ -115,6 +115,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     implementation "com.github.PhilJay:MPAndroidChart:v3.0.3"
+
+    implementation 'com.airbnb.android:lottie:2.2.0'
 }
 repositories {
     mavenCentral()
