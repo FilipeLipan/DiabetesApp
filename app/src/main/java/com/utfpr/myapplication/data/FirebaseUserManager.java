@@ -19,14 +19,18 @@ import io.reactivex.disposables.Disposable;
 public class FirebaseUserManager {
 
     private static final String TAG = FirebaseUserManager.class.getSimpleName();
-
     private static final String USER_COLLECTION_NAME = "user";
-
     private static final String HISTORY_COLLECTION_NAME = "history";
+    private final FirebaseFirestore firebaseFirestore;
 
-    public static Observable<User> getUser(String userId){
+    public FirebaseUserManager(FirebaseFirestore firebaseFirestore){
+        this.firebaseFirestore = firebaseFirestore;
+    }
+
+
+    public Observable<User> getUser(String userId){
         return Observable.create(emmiter -> {
-            FirebaseFirestore.getInstance().collection(USER_COLLECTION_NAME).document(userId)
+            firebaseFirestore.collection(USER_COLLECTION_NAME).document(userId)
                     .get()
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
@@ -44,9 +48,9 @@ public class FirebaseUserManager {
         });
     }
 
-    public static Completable createUser(String userId, User user){
+    public Completable createUser(String userId, User user){
         return Completable.create(emmiter -> {
-            FirebaseFirestore.getInstance().collection(USER_COLLECTION_NAME)
+            firebaseFirestore.collection(USER_COLLECTION_NAME)
                     .document(userId)
                     .set(user)
                     .addOnCompleteListener(task -> {
@@ -61,9 +65,9 @@ public class FirebaseUserManager {
         });
     }
 
-    public static Observable<String> createHistory(String userId, History history){
+    public Observable<String> createHistory(String userId, History history){
         return Observable.create(emmiter -> {
-            FirebaseFirestore.getInstance().collection(USER_COLLECTION_NAME)
+            firebaseFirestore.collection(USER_COLLECTION_NAME)
                     .document(userId)
                     .collection(HISTORY_COLLECTION_NAME)
                     .add(history)
@@ -79,9 +83,9 @@ public class FirebaseUserManager {
         });
     }
 
-    public static Observable<History> getUserHistory(String userId, String historyId){
+    public Observable<History> getUserHistory(String userId, String historyId){
         return Observable.create(emmiter -> {
-            FirebaseFirestore.getInstance().collection(USER_COLLECTION_NAME).document(userId)
+            firebaseFirestore.collection(USER_COLLECTION_NAME).document(userId)
                     .collection(HISTORY_COLLECTION_NAME)
                     .document(historyId)
                     .get()
@@ -101,9 +105,9 @@ public class FirebaseUserManager {
         });
     }
 
-    public static Observable<List<History>> getAllUserHistory(String userId){
+    public Observable<List<History>> getAllUserHistory(String userId){
         return Observable.create(emmiter -> {
-            FirebaseFirestore.getInstance().collection(USER_COLLECTION_NAME).document(userId)
+            firebaseFirestore.collection(USER_COLLECTION_NAME).document(userId)
                     .collection(HISTORY_COLLECTION_NAME)
                     .get()
                     .addOnCompleteListener(task -> {

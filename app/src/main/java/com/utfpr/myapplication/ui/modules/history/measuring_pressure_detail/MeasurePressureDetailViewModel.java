@@ -17,9 +17,11 @@ import io.reactivex.schedulers.Schedulers;
 public class MeasurePressureDetailViewModel extends BaseViewModel {
 
     private MutableLiveData<History> historyMutableLiveData = new MutableLiveData<>();
+    private final FirebaseUserManager firebaseUserManager;
 
     @Inject
-    public MeasurePressureDetailViewModel() {
+    public MeasurePressureDetailViewModel(FirebaseUserManager firebaseUserManager) {
+        this.firebaseUserManager = firebaseUserManager;
     }
 
     public LiveData<History> getHistoryMutableLiveData() {
@@ -29,7 +31,7 @@ public class MeasurePressureDetailViewModel extends BaseViewModel {
     public void loadHistory(String userId, String historyId) {
         showLoading();
 
-        addDisposable(FirebaseUserManager.getUserHistory(userId, historyId)
+        addDisposable(firebaseUserManager.getUserHistory(userId, historyId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<History>() {

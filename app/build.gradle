@@ -37,7 +37,7 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField 'String', 'VISION_API_KEY', VisionApiKey
+        it.buildConfigField 'String', 'VISION_API_KEY', '"adasdas"'
     }
 
     dataBinding {

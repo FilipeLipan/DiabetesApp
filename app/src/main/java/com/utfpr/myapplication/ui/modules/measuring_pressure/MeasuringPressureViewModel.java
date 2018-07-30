@@ -45,9 +45,11 @@ public class MeasuringPressureViewModel extends BaseViewModel {
     private double beats = 0;
     private long startTime = 0;
     private List<Long> beatLog = new ArrayList<>();
+    private final FirebaseUserManager firebaseUserManager;
 
     @Inject
-    public MeasuringPressureViewModel(){
+    public MeasuringPressureViewModel(FirebaseUserManager firebaseUserManager){
+        this.firebaseUserManager = firebaseUserManager;
         isProcessingMutableLivedata.setValue(false);
     }
 
@@ -179,7 +181,7 @@ public class MeasuringPressureViewModel extends BaseViewModel {
                 .setType(StringUtils.HEART_BEAT_TYPE)
                 .setEntries(entries);
 
-        addDisposable(FirebaseUserManager.createHistory(FirebaseAuth.getInstance().getUid(), history)
+        addDisposable(firebaseUserManager.createHistory(FirebaseAuth.getInstance().getUid(), history)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<String>() {

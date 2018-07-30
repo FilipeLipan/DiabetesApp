@@ -34,7 +34,7 @@
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:src="@drawable/logo_google"
-            android:elevation="6dp"
+            android:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="@id/google_login"
             app:layout_constraintEnd_toEndOf="@id/google_login"
             app:layout_constraintHorizontal_bias="0.08"

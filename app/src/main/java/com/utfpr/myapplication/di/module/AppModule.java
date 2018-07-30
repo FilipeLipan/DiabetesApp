@@ -7,8 +7,12 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.VisionRequestInitializer;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.utfpr.myapplication.BuildConfig;
+import com.utfpr.myapplication.data.FirebaseNewsManager;
+import com.utfpr.myapplication.data.FirebaseTutorialManager;
+import com.utfpr.myapplication.data.FirebaseUserManager;
 import com.utfpr.myapplication.data.local.LocalPreferences;
 import com.utfpr.myapplication.data.local.UserPreferences;
 
@@ -55,5 +59,34 @@ public class AppModule {
     @Provides
     LocalPreferences provideLocalPreferences(Context context) {
         return new LocalPreferences(context);
+    }
+
+    @Reusable
+    @Provides
+    FirebaseFirestore provideFirebase(){
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        firebaseFirestore.setFirestoreSettings(settings);
+        return firebaseFirestore;
+    }
+
+    @Singleton
+    @Provides
+    FirebaseNewsManager provideFirebaseNewsManager(FirebaseFirestore firebaseFirestore){
+        return new FirebaseNewsManager(firebaseFirestore);
+    }
+
+    @Singleton
+    @Provides
+    FirebaseTutorialManager provideFirebaseTutorialManager(FirebaseFirestore firebaseFirestore){
+        return new FirebaseTutorialManager(firebaseFirestore);
+    }
+
+    @Singleton
+    @Provides
+    FirebaseUserManager provideFirebaseUserManager(FirebaseFirestore firebaseFirestore){
+        return new FirebaseUserManager(firebaseFirestore);
     }
 }
