@@ -86,7 +86,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    FirebaseUserManager provideFirebaseUserManager(FirebaseFirestore firebaseFirestore){
-        return new FirebaseUserManager(firebaseFirestore);
+    FirebaseUserManager provideFirebaseUserManager(FirebaseFirestore firebaseFirestore, LocalPreferences localPreferences){
+        return new FirebaseUserManager(firebaseFirestore, localPreferences);
     }
 }

@@ -3,11 +3,15 @@
     package="com.utfpr.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
     <application
@@ -18,10 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.modules.login.LoginActivity"
             android:theme="@style/FullScreen">
@@ -31,25 +34,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.modules.tutorial.TutorialActivity"
-            android:theme="@style/FullScreen"/>
-
+        <activity
+            android:name=".ui.modules.tutorial.TutorialActivity"
+            android:theme="@style/FullScreen" />
         <activity
             android:name=".ui.modules.history.measuring_pressure_detail.MeasurePressureDetailActivity"
-            android:label="@string/measure_pressure_detail" >
+            android:label="@string/measure_pressure_detail"></activity>
+        <activity android:name=".ui.modules.measuring_pressure.HeartRateMonitor">
 
-        </activity>
-        <activity android:name=".ui.modules.measuring_pressure.HeartRateMonitor" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="aa4bffaa2aef24c11e997c6618de4075a13722fc" />
+
+        <receiver android:name=".ui.ReminderWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/reminder_widget_info" />
+        </receiver>
     </application>
+
 </manifest>

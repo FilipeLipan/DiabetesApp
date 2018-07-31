@@ -3,9 +3,11 @@ package com.utfpr.myapplication.data;
 import android.util.Log;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.utfpr.myapplication.data.local.LocalPreferences;
 import com.utfpr.myapplication.models.History;
 import com.utfpr.myapplication.models.User;
 
+import java.util.Calendar;
 import java.util.List;
 
 import io.reactivex.Completable;
@@ -21,9 +23,11 @@ public class FirebaseUserManager {
     private static final String USER_COLLECTION_NAME = "user";
     private static final String HISTORY_COLLECTION_NAME = "history";
     private final FirebaseFirestore firebaseFirestore;
+    private final LocalPreferences localPreferences;
 
-    public FirebaseUserManager(FirebaseFirestore firebaseFirestore){
+    public FirebaseUserManager(FirebaseFirestore firebaseFirestore, LocalPreferences localPreferences){
         this.firebaseFirestore = firebaseFirestore;
+        this.localPreferences = localPreferences;
     }
 
 
@@ -65,6 +69,8 @@ public class FirebaseUserManager {
     }
 
     public Observable<String> createHistory(String userId, History history){
+        localPreferences.saveLastExamDate(Calendar.getInstance().getTimeInMillis());
+
         return Observable.create(emmiter -> {
             firebaseFirestore.collection(USER_COLLECTION_NAME)
                     .document(userId)

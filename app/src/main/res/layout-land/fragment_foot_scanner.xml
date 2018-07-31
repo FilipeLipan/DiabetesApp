@@ -9,16 +9,16 @@
         tools:context=".ui.MainActivity">
 
         <TextView
+            android:id="@+id/result_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/result_textview"
-            android:textSize="20sp"
             android:fontFamily="sans-serif-medium"
-            tools:text="Detectado"
+            android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/photo_ImageView"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline_center_horizontal"
+            app:layout_constraintTop_toTopOf="@+id/click_to_take_picture_include"
+            tools:text="Detectado" />
 
 
         <ImageView
@@ -63,7 +63,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline_center_horizontal"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/result_textview" />
 
 
         <android.support.constraint.Guideline
