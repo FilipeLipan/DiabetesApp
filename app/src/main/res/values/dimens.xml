@@ -40,5 +40,6 @@
     <dimen name="login_image_size">150dp</dimen>
     <dimen name="tutorial_title_size">30sp</dimen>
     <dimen name="tutorial_description_size">16sp</dimen>
+    <dimen name="list_landscape_size">340dp</dimen>
 
 </resources>
