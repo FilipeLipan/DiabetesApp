@@ -10,7 +10,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="foot_scan">Scan de pé</string>
     <string name="click_to_take_picture">Clique para tirar foto</string>
-    <string name="cant_load_photo">Não foi possivel carregar a foto</string>
+    <string name="cant_load_photo">Não foi possível carregar a foto</string>
     <string name="beats_per_minute">Batimentos por minuto</string>
     <string name="history">Histórico</string>
     <string name="measuring_pressure">Medir pressão</string>
