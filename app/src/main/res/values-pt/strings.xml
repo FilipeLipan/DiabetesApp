@@ -22,8 +22,8 @@
     <string name="detected">Detectado</string>
     <string name="normal">Normal</string>
     <string name="what_to_do_now">O quê fazer agora?</string>
-    <string name="normal_what_to_do_text" />
-    <string name="detected_what_to_do_text" />
+    <string name="normal_what_to_do_text" >lorem ipsum dan adn aom oam oasm asdm oiadmio asnoid nasdoifas omnf oiasf afmasm asmpo fmaspo fa aas</string>
+    <string name="detected_what_to_do_text" >lorem ipsum dan adn aom oam oasm asdm oiadmio asnoid nasdoifas omnf oiasf afmasm asmpo fmaspo fa aas</string>
     <string name="heart_pressure_tutorial">Coloque a ponta do dedo em cima da lanterna e apoie seu dedo na câmera. \n O teste vai começar quando forem detectados os primeiros batimentos</string>
     <string name="empty_beat_per_minute">000</string>
     <string name="restart_process">Reiniciar processo</string>
