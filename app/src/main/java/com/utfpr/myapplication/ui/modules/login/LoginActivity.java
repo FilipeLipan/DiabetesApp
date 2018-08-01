@@ -135,7 +135,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                Toast.makeText(LoginActivity.this, R.string.authentication_failed,
                         Toast.LENGTH_SHORT).show();
             }
         }
@@ -154,7 +154,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, "Authentication Success.",
+                            Toast.makeText(LoginActivity.this, R.string.authentication_success,
                                     Toast.LENGTH_SHORT).show();
 
                             hideLoading();
@@ -163,7 +163,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
                             hideLoading();
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, getString(R.string.authentication_failed),
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
