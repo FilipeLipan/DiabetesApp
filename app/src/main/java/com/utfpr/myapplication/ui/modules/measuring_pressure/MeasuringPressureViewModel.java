@@ -135,6 +135,9 @@ public class MeasuringPressureViewModel extends BaseViewModel {
             if (beatsIndex == BEATS_ARRAY_SIZE) beatsIndex = 0;
             beatsArray[beatsIndex] = dpm;
             beatsIndex++;
+            if(beatLog.size() >= BEAT_LOG_MAXIMUM_ARRAY_SIZE){
+                isProcessingMutableLivedata.setValue(false);
+            }
 
             int beatsArrayAvg = 0;
             int beatsArrayCnt = 0;
@@ -150,9 +153,7 @@ public class MeasuringPressureViewModel extends BaseViewModel {
             beats = 0;
         }
 
-        if(beatLog.size() == BEAT_LOG_MAXIMUM_ARRAY_SIZE){
-            isProcessingMutableLivedata.setValue(false);
-        }
+
 
         processing.set(false);
     }
