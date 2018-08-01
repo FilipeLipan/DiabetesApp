@@ -1,12 +1,15 @@
 package com.utfpr.myapplication.ui.modules.measuring_pressure;
 
+import android.Manifest;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -21,6 +24,7 @@ public class MeasuringPressureFragment extends BaseFragment<MeasuringPressureVie
     private SurfaceHolder previewHolder = null;
     private Camera camera = null;
     private WakeLock wakeLock = null;
+    private final int CAMERA_PERMISSION = 1556;
 
     public static MeasuringPressureFragment newInstance(){
         return new MeasuringPressureFragment();
@@ -39,31 +43,39 @@ public class MeasuringPressureFragment extends BaseFragment<MeasuringPressureVie
         });
 
 
-        previewHolder = getDataBind().cameraSurfaceview.getHolder();
-        previewHolder.addCallback(surfaceCallback);
+        checkPermissionAndStartCamera();
+        observeLiveData();
+    }
 
+    private void initCamera(){
         if(getContext() != null) {
             PowerManager pm = (PowerManager) getContext().getSystemService(Context.POWER_SERVICE);
             wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DoNotDimScreen");
         }
-        observeLiveData();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
+        previewHolder = getDataBind().cameraSurfaceview.getHolder();
+        previewHolder.addCallback(surfaceCallback);
         wakeLock.acquire(10*60*1000L /*10 minutes*/);
         camera = Camera.open();
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            initCamera();
+        }
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
-        wakeLock.release();
-        camera.setPreviewCallback(null);
-        camera.stopPreview();
-        camera.release();
-        camera = null;
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            wakeLock.release();
+            camera.setPreviewCallback(null);
+            camera.stopPreview();
+            camera.release();
+            camera = null;
+        }
     }
 
     private void observeLiveData() {
@@ -135,6 +147,31 @@ public class MeasuringPressureFragment extends BaseFragment<MeasuringPressureVie
         }
 
         return result;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == CAMERA_PERMISSION) {
+            if (permissions[0].equals(Manifest.permission.CAMERA)
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                initCamera();
+            }
+        }
+    }
+
+
+    private void checkPermissionAndStartCamera() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+                    new String[]{android.Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION);
+        } else {
+            initCamera();
+        }
     }
 
     @Override
