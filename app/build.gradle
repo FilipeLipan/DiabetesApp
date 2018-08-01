@@ -28,10 +28,10 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('key.jks')
-            storePassword '5a6b7c8d9e'
+            storeFile file('app.jks')
+            storePassword 'lipan1201301313'
             keyAlias 'KeyAlias'
-            keyPassword '@Keypasswor'
+            keyPassword 'lipan1201301313'
         }
     }
 

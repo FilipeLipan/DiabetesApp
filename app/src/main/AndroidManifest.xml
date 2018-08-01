@@ -40,18 +40,6 @@
         <activity
             android:name=".ui.modules.history.measuring_pressure_detail.MeasurePressureDetailActivity"
             android:label="@string/measure_pressure_detail"></activity>
-        <activity android:name=".ui.modules.measuring_pressure.HeartRateMonitor">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-<<<<<<< HEAD
-=======
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
->>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
-        </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -93,20 +93,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <!--//TODO create tutorial image-->
                 <ImageButton
                     android:id="@+id/tutorial_imageview"
                     android:layout_width="@dimen/measure_pressure_tutorial_image"
                     android:layout_height="@dimen/measure_pressure_tutorial_image"
-<<<<<<< HEAD
                     android:src="@drawable/tutorial_pressure"
-                    android:contentDescription="@string/heart_pressure_tutorial"
-                    android:layout_marginTop="@dimen/screen_title_spacing"
-=======
                     android:layout_marginTop="@dimen/screen_title_spacing"
                     android:contentDescription="@string/heart_pressure_tutorial"
                     app:layout_constraintBottom_toBottomOf="parent"
->>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -121,10 +115,7 @@
                     android:fontFamily="sans-serif-medium"
                     android:text="@string/heart_pressure_tutorial"
                     android:textAlignment="center"
-<<<<<<< HEAD
-=======
                     android:textColor="@android:color/white"
->>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tutorial_imageview" />
