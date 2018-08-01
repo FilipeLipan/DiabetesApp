@@ -9,9 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 
 import com.utfpr.myapplication.R;
-import com.utfpr.myapplication.ui.MainActivity;
-import com.utfpr.myapplication.ui.common.BaseFragmentActivity;
 import com.utfpr.myapplication.databinding.ActivityTutorialBinding;
+import com.utfpr.myapplication.ui.common.BaseFragmentActivity;
 
 import java.util.ArrayList;
 import java.util.List;

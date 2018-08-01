@@ -1,8 +1,6 @@
 package com.utfpr.myapplication.app;
 
 import android.app.Activity;
-import android.app.Application;
-import android.app.Service;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AppCompatDelegate;
@@ -11,12 +9,12 @@ import com.crashlytics.android.Crashlytics;
 import com.utfpr.myapplication.di.AppInjector;
 import com.utfpr.myapplication.di.component.AppComponent;
 
+import javax.inject.Inject;
+
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
-import dagger.android.HasServiceInjector;
 import io.fabric.sdk.android.Fabric;
-import javax.inject.Inject;
 
 public class App extends MultiDexApplication implements HasActivityInjector {
 

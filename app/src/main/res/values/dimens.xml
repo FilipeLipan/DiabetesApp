@@ -7,7 +7,7 @@
     <dimen name="medium_horizontal_spacing">12dp</dimen>
     <dimen name="heavy_horizontal_spacing">16dp</dimen>
 
-    <dimen name="extra_small_vertical_spacing">8dp</dimen>
+    <dimen name="extra_small_vertical_spacing">4dp</dimen>
     <dimen name="small_vertical_spacing">8dp</dimen>
     <dimen name="medium_vertical_spacing">12dp</dimen>
     <dimen name="heavy_vertical_spacing">16dp</dimen>
@@ -35,5 +35,18 @@
     <dimen name="measure_pressure_tutorial_image">200dp</dimen>
     <dimen name="measuring_pressure_surfaceview_size">180dp</dimen>
     <dimen name="beat_per_minute_size">80sp</dimen>
+    <dimen name="news_card_size">140dp</dimen>
+    <dimen name="google_button_logo_size">18dp</dimen>
+    <dimen name="login_image_size">150dp</dimen>
+    <dimen name="tutorial_title_size">30sp</dimen>
+    <dimen name="tutorial_description_size">16sp</dimen>
+    <dimen name="list_landscape_size">340dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_padding">20dp</dimen>
 
 </resources>

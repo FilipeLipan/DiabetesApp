@@ -20,8 +20,11 @@ public class HistoryViewModel extends BaseViewModel {
 
     private MutableLiveData<List<History>> historyMutableLiveData = new MutableLiveData<>();
 
+    private final FirebaseUserManager firebaseUserManager;
+
     @Inject
-    HistoryViewModel(){
+    HistoryViewModel(FirebaseUserManager firebaseUserManager){
+        this.firebaseUserManager = firebaseUserManager;
         getAllUserHistory(FirebaseAuth.getInstance().getUid());
     }
 
@@ -32,7 +35,7 @@ public class HistoryViewModel extends BaseViewModel {
     public void getAllUserHistory(String userId){
         showLoading();
 
-        addDisposable(FirebaseUserManager.getAllUserHistory(userId)
+        addDisposable(firebaseUserManager.getAllUserHistory(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<History>>() {
@@ -45,6 +48,7 @@ public class HistoryViewModel extends BaseViewModel {
                     @Override
                     public void onError(Throwable e) {
                         hideLoading();
+                        showError(e);
                     }
 
                     @Override

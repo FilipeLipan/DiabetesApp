@@ -6,10 +6,10 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
-import com.utfpr.myapplication.ui.MainActivity;
 import com.utfpr.myapplication.R;
-import com.utfpr.myapplication.ui.common.BaseFragment;
 import com.utfpr.myapplication.databinding.FragmentTutorialItemBinding;
+import com.utfpr.myapplication.ui.MainActivity;
+import com.utfpr.myapplication.ui.common.BaseFragment;
 
 /**
  * Created by lispa on 30/03/2018.

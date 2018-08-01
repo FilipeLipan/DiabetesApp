@@ -27,4 +27,14 @@
     <string name="heart_pressure_tutorial">Coloque a ponta do dedo em cima da lanterna e apoie seu dedo na câmera. \n O teste vai começar quando forem detectados os primeiros batimentos</string>
     <string name="empty_beat_per_minute">000</string>
     <string name="restart_process">Reiniciar processo</string>
+    <string name="news_banner">banner da notícia</string>
+    <string name="item_not_found">Nenhum item foi encontrado</string>
+    <string name="tutorial_image">imagem do tutorial</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="widget_date_format">dd/MM/yyyy</string>
+
+    <string name="last_exam_date">Último exame realizado em: %1$s</string>
+    <string name="make_another_exam_widget_status">Status: Realizar novo exame</string>
+    <string name="ok_widget_status">Status: OK</string>
 </resources>

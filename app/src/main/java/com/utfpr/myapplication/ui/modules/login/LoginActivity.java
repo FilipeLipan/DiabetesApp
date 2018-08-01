@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -22,11 +23,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.utfpr.myapplication.ui.MainActivity;
 import com.utfpr.myapplication.R;
-import com.utfpr.myapplication.ui.common.BaseActivity;
 import com.utfpr.myapplication.databinding.ActivityLoginBinding;
 import com.utfpr.myapplication.models.User;
+import com.utfpr.myapplication.ui.MainActivity;
+import com.utfpr.myapplication.ui.common.BaseActivity;
 import com.utfpr.myapplication.ui.modules.tutorial.TutorialActivity;
 
 /**
@@ -42,9 +43,6 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
     private FirebaseAuth mAuth;
 
     private GoogleSignInClient mGoogleSignInClient;
-//    private TextView mStatusTextView;
-//    private TextView mDetailTextView;
-
 
     public static void launch(Context context){
         Intent intent = new Intent(context, LoginActivity.class);
@@ -90,14 +88,19 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
     public void observeViewModel(){
         getViewModel().getTutorialItemLivedata().observe(this, list -> {
             if (list != null) {
-                TutorialActivity.launch(LoginActivity.this, list);
+                if(list.isEmpty()){
+                    MainActivity.launch(LoginActivity.this);
+                }else {
+                    TutorialActivity.launch(LoginActivity.this, list);
+                }
                 LoginActivity.this.finish();
             }
         });
 
         getViewModel().getGoToMainActivityLiveData().observe(this, goToMain -> {
             if (goToMain != null && goToMain) {
-                MainActivity.launchAndClearTop(LoginActivity.this);
+                MainActivity.launch(LoginActivity.this);
+                LoginActivity.this.finish();
             }
         });
     }
@@ -140,6 +143,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+        showLoading();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -153,11 +157,10 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
                             Toast.makeText(LoginActivity.this, "Authentication Success.",
                                     Toast.LENGTH_SHORT).show();
 
-                            //TODO create preferences to decide stuff
-//                            TutorialActivity.launch(LoginActivity.this);
+                            hideLoading();
                             getViewModel().loadUser(mAuth.getUid(), new User());
-
                         } else {
+                            hideLoading();
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
@@ -165,5 +168,15 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
                         }
                     }
                 });
+    }
+
+    @Override
+    public void showLoading() {
+        getDataBind().loadingView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        getDataBind().loadingView.setVisibility(View.GONE);
     }
 }

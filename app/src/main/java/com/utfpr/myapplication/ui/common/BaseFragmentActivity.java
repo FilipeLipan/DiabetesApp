@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -23,7 +24,7 @@ import dagger.android.support.HasSupportFragmentInjector;
  * Created by lispa on 25/03/2018.
  */
 
-public abstract class BaseFragmentActivity<V extends ViewModel, B extends ViewDataBinding> extends AppCompatActivity implements HasSupportFragmentInjector {
+public abstract class BaseFragmentActivity<V extends BaseViewModel, B extends ViewDataBinding> extends AppCompatActivity implements HasSupportFragmentInjector {
 
     @Inject
     protected DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
@@ -48,6 +49,8 @@ public abstract class BaseFragmentActivity<V extends ViewModel, B extends ViewDa
                 getToolbar().setTitleTextColor(getResources().getColor(android.R.color.white));
             }
         }
+
+        observeViewModel();
     }
 
     public void setTitle(@NonNull String title) {
@@ -112,6 +115,30 @@ public abstract class BaseFragmentActivity<V extends ViewModel, B extends ViewDa
 
     public ViewModelProvider.Factory getViewModelFactory() {
         return this.viewModelFactory;
+    }
+
+    private void observeViewModel(){
+        getViewModel().getLoading().observe(this, isLoading -> {
+            if (isLoading != null) {
+                if (isLoading) {
+                    showLoading();
+                } else {
+                    hideLoading();
+                }
+            }
+        });
+
+        getViewModel().getError().observe(this , error -> {
+            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+        });
+    }
+
+    public void showLoading(){
+
+    }
+
+    public void hideLoading(){
+
     }
 
 }

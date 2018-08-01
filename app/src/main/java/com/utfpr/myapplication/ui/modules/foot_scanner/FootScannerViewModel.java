@@ -25,13 +25,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-
-import javax.inject.Inject;
 
 
 /**
@@ -40,10 +40,14 @@ import javax.inject.Inject;
 
 public class FootScannerViewModel extends BaseViewModel {
 
+<<<<<<< HEAD
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private MutableLiveData<Boolean> scanResult = new MutableLiveData<Boolean>();
     private SingleLiveEvent<String> createdHistoryIdLiveData = new SingleLiveEvent<>();
+=======
+    MutableLiveData<Boolean> scanResult = new MutableLiveData<Boolean>();
+>>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
 
     private Vision vision;
 
@@ -63,10 +67,14 @@ public class FootScannerViewModel extends BaseViewModel {
     public void startScanning(Bitmap bitmap) {
         showLoading();
 
-        compositeDisposable.clear();
-        compositeDisposable.dispose();
+        getCompositeDisposable().clear();
+        getCompositeDisposable().dispose();
 
+<<<<<<< HEAD
         addDisposable(scanBitmap(bitmap)
+=======
+            addDisposable(scanBitmap(bitmap)
+>>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<Boolean>() {
@@ -81,6 +89,7 @@ public class FootScannerViewModel extends BaseViewModel {
                     public void onError(Throwable e) {
                         hideLoading();
                         scanResult.setValue(false);
+                        showError(e);
                     }
 
                     @Override
@@ -140,6 +149,7 @@ public class FootScannerViewModel extends BaseViewModel {
         });
     }
 
+<<<<<<< HEAD
 
     private void createHistory(boolean wasDetected){
         showLoading();
@@ -179,6 +189,8 @@ public class FootScannerViewModel extends BaseViewModel {
         compositeDisposable.clear();
         compositeDisposable.dispose();
     }
+=======
+>>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
 
 
 }

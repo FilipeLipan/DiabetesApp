@@ -25,6 +25,16 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
+
+    signingConfigs {
+        release {
+            storeFile file('key.jks')
+            storePassword '5a6b7c8d9e'
+            keyAlias 'KeyAlias'
+            keyPassword '@Keypasswor'
+        }
+    }
+
     buildTypes {
 
         debug {
@@ -37,7 +47,7 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField 'String', 'VISION_API_KEY', VisionApiKey
+        it.buildConfigField 'String', 'VISION_API_KEY', '"adasdas"'
     }
 
     dataBinding {
@@ -115,6 +125,8 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     implementation "com.github.PhilJay:MPAndroidChart:v3.0.3"
+
+    implementation 'com.airbnb.android:lottie:2.2.0'
 }
 repositories {
     mavenCentral()

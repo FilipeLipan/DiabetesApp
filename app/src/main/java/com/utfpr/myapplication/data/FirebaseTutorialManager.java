@@ -19,13 +19,15 @@ import io.reactivex.Observable;
 
 public class FirebaseTutorialManager {
 
-    public static final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore firebaseFirestore;
+    private static final String TAG = FirebaseTutorialManager.class.getSimpleName();
+    private static final String TUTORIAL_COLLECTION_NAME = "tutorial";
 
-    public static final String TAG = FirebaseTutorialManager.class.getSimpleName();
+    public FirebaseTutorialManager(FirebaseFirestore firebaseFirestore){
+        this.firebaseFirestore = firebaseFirestore;
+    }
 
-    public static final String TUTORIAL_COLLECTION_NAME = "tutorial";
-
-    public static Observable<List<TutorialItem>> getAll(){
+    public Observable<List<TutorialItem>> getAll(){
         return Observable.create(emmiter -> {
             firebaseFirestore.collection(TUTORIAL_COLLECTION_NAME)
                     .get()
