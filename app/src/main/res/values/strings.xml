@@ -39,4 +39,6 @@
     <string name="ok_widget_status">Status: OK</string>
     <string name="authentication_failed">Authentication failed.</string>
     <string name="authentication_success">Authentication Success.</string>
+    <string name="wound_detected">Ferida detectada</string>
+    <string name="wound_not_detected">Ferida não detectada</string>
 </resources>
