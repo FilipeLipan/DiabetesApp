@@ -42,4 +42,7 @@
     <string name="wound_detected">Wound detected</string>
     <string name="wound_not_detected">Wound not detected</string>
     <string name="logout">logout</string>
+    <string name="app_logo">App logo</string>
+    <string name="google_logo">Google logo</string>
+    <string name="camera">Camera</string>
 </resources>
