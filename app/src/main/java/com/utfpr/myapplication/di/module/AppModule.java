@@ -7,6 +7,7 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.VisionRequestInitializer;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.utfpr.myapplication.BuildConfig;
@@ -72,21 +73,32 @@ public class AppModule {
         return firebaseFirestore;
     }
 
-    @Singleton
+    @Reusable
     @Provides
-    FirebaseNewsManager provideFirebaseNewsManager(FirebaseFirestore firebaseFirestore){
-        return new FirebaseNewsManager(firebaseFirestore);
+    FirebaseDatabase provideFirebaseRealTimeDatabase(){
+        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        firebaseFirestore.setFirestoreSettings(settings);
+        return FirebaseDatabase.getInstance();
     }
 
     @Singleton
     @Provides
-    FirebaseTutorialManager provideFirebaseTutorialManager(FirebaseFirestore firebaseFirestore){
-        return new FirebaseTutorialManager(firebaseFirestore);
+    FirebaseNewsManager provideFirebaseNewsManager(FirebaseDatabase firebaseDatabase){
+        return new FirebaseNewsManager(firebaseDatabase);
     }
 
     @Singleton
     @Provides
-    FirebaseUserManager provideFirebaseUserManager(FirebaseFirestore firebaseFirestore, LocalPreferences localPreferences){
-        return new FirebaseUserManager(firebaseFirestore, localPreferences);
+    FirebaseTutorialManager provideFirebaseTutorialManager(FirebaseDatabase firebaseDatabase){
+        return new FirebaseTutorialManager(firebaseDatabase);
+    }
+
+    @Singleton
+    @Provides
+    FirebaseUserManager provideFirebaseUserManager(FirebaseFirestore firebaseFirestore, FirebaseDatabase firebaseDatabase, LocalPreferences localPreferences){
+        return new FirebaseUserManager(firebaseFirestore, firebaseDatabase, localPreferences);
     }
 }
