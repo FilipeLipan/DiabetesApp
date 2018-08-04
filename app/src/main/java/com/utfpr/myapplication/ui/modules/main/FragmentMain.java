@@ -8,19 +8,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.databinding.FragmentMainBinding;
-<<<<<<< HEAD
 import com.utfpr.myapplication.ui.common.BaseFragment;
-=======
 import com.utfpr.myapplication.models.History;
 import com.utfpr.myapplication.models.News;
-import com.utfpr.myapplication.ui.common.BaseFragment;
 import com.utfpr.myapplication.ui.modules.history.measuring_pressure_detail.MeasurePressureDetailActivity;
 import com.utfpr.myapplication.ui.modules.login.LoginActivity;
 import com.utfpr.myapplication.utils.StringUtils;
 import com.utfpr.myapplication.utils.ViewUtils;
->>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
 
 import java.util.ArrayList;
 
@@ -53,12 +50,7 @@ public class FragmentMain extends BaseFragment<MainFragmentViewModel, FragmentMa
 
         getBaseActivity().setTitle(getString(R.string.title_home));
 
-<<<<<<< HEAD
-//        getDataBind().logoutButton.setOnClickListener( v ->{
-//            FirebaseAuth.getInstance().signOut();
-//            LoginActivity.launchAndClearTop(getContext());
-//        });
-=======
+
         getDataBind().logoutButton.setOnClickListener( v ->{
             FirebaseAuth.getInstance().signOut();
             LoginActivity.launchAndClearTop(getContext());
@@ -114,6 +106,5 @@ public class FragmentMain extends BaseFragment<MainFragmentViewModel, FragmentMa
     @Override
     public void hideLoading() {
         getDataBind().newsSwipeToRefresh.setRefreshing(false);
->>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
     }
 }

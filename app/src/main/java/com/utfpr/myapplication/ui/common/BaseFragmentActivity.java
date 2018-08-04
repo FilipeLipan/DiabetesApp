@@ -1,6 +1,5 @@
 package com.utfpr.myapplication.ui.common;
 
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;

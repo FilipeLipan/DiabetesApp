@@ -10,7 +10,10 @@ import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.models.History;
 import com.utfpr.myapplication.utils.StringUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,12 +33,20 @@ public class HistoryAdapter extends BaseQuickAdapter<History, BaseViewHolder> {
     protected void convert(BaseViewHolder helper, History item) {
         helper.addOnClickListener(R.id.backgroud_view);
 
-        helper.setText(R.id.day_number_textview, mDayFormatter.format(item.getCreatedAt()))
-                .setText(R.id.month_name_textview, mMonthFormatter.format(item.getCreatedAt()).toUpperCase())
+        Date date;
+        try {
+            date = StringUtils.transformStringIntoDate(item.getCreatedAt());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            date = Calendar.getInstance().getTime();
+        }
+
+        helper.setText(R.id.day_number_textview, mDayFormatter.format(date))
+                .setText(R.id.month_name_textview, mMonthFormatter.format(date).toUpperCase())
                 .setText(R.id.scan_type_textview, StringUtils.getExamType(context, item.getType()))
                 .setText(R.id.scan_fulldate_textview,
                         mContext.getString(R.string.history_second_label,
-                        mTimeFormatter.format(item.getCreatedAt()),
+                        mTimeFormatter.format(date),
                         StringUtils.getResultType(mContext, item.getResult())));
 
 

@@ -4,23 +4,32 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class HistoryChartEntry implements Parcelable {
-    private int x;
-    private int y;
+    public Long x;
+    public Long y;
 
-    public int getX() {
+    public HistoryChartEntry(){
+
+    }
+
+    public HistoryChartEntry(Long x, Long y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public Long getX() {
         return x;
     }
 
-    public HistoryChartEntry setX(int x) {
+    public HistoryChartEntry setX(Long x) {
         this.x = x;
         return this;
     }
 
-    public int getY() {
+    public Long getY() {
         return y;
     }
 
-    public HistoryChartEntry setY(int y) {
+    public HistoryChartEntry setY(Long y) {
         this.y = y;
         return this;
     }
@@ -33,16 +42,14 @@ public class HistoryChartEntry implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.x);
-        dest.writeInt(this.y);
+        dest.writeLong(this.x);
+        dest.writeLong(this.y);
     }
 
-    public HistoryChartEntry() {
-    }
 
     protected HistoryChartEntry(Parcel in) {
-        this.x = in.readInt();
-        this.y = in.readInt();
+        this.x = in.readLong();
+        this.y = in.readLong();
     }
 
     public static final Parcelable.Creator<HistoryChartEntry> CREATOR = new Parcelable.Creator<HistoryChartEntry>() {

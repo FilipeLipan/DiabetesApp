@@ -7,8 +7,7 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.VisionRequestInitializer;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.database.FirebaseDatabase;
 import com.utfpr.myapplication.BuildConfig;
 import com.utfpr.myapplication.data.FirebaseNewsManager;
 import com.utfpr.myapplication.data.FirebaseTutorialManager;
@@ -61,32 +60,30 @@ public class AppModule {
         return new LocalPreferences(context);
     }
 
+
     @Reusable
     @Provides
-    FirebaseFirestore provideFirebase(){
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(true)
-                .build();
-        firebaseFirestore.setFirestoreSettings(settings);
-        return firebaseFirestore;
+    FirebaseDatabase provideFirebaseRealTimeDatabase(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
+        return FirebaseDatabase.getInstance();
     }
 
     @Singleton
     @Provides
-    FirebaseNewsManager provideFirebaseNewsManager(FirebaseFirestore firebaseFirestore){
-        return new FirebaseNewsManager(firebaseFirestore);
+    FirebaseNewsManager provideFirebaseNewsManager(FirebaseDatabase firebaseDatabase){
+        return new FirebaseNewsManager(firebaseDatabase);
     }
 
     @Singleton
     @Provides
-    FirebaseTutorialManager provideFirebaseTutorialManager(FirebaseFirestore firebaseFirestore){
-        return new FirebaseTutorialManager(firebaseFirestore);
+    FirebaseTutorialManager provideFirebaseTutorialManager(FirebaseDatabase firebaseDatabase){
+        return new FirebaseTutorialManager(firebaseDatabase);
     }
 
     @Singleton
     @Provides
-    FirebaseUserManager provideFirebaseUserManager(FirebaseFirestore firebaseFirestore, LocalPreferences localPreferences){
-        return new FirebaseUserManager(firebaseFirestore, localPreferences);
+    FirebaseUserManager provideFirebaseUserManager(FirebaseDatabase firebaseDatabase, LocalPreferences localPreferences){
+        return new FirebaseUserManager(firebaseDatabase, localPreferences);
     }
 }

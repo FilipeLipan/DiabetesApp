@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.utfpr.myapplication.data.FirebaseUserManager;
 import com.utfpr.myapplication.livedata_resources.SingleLiveEvent;
 import com.utfpr.myapplication.models.History;
-import com.utfpr.myapplication.models.HistoryChartEntry;
 import com.utfpr.myapplication.ui.common.BaseViewModel;
 import com.utfpr.myapplication.utils.StringUtils;
 
@@ -40,41 +39,28 @@ import io.reactivex.schedulers.Schedulers;
 
 public class FootScannerViewModel extends BaseViewModel {
 
-<<<<<<< HEAD
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     private MutableLiveData<Boolean> scanResult = new MutableLiveData<Boolean>();
     private SingleLiveEvent<String> createdHistoryIdLiveData = new SingleLiveEvent<>();
-=======
-    MutableLiveData<Boolean> scanResult = new MutableLiveData<Boolean>();
->>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
+    private final FirebaseUserManager firebaseUserManager;
 
     private Vision vision;
 
     @Inject
-    public FootScannerViewModel(Vision vision) {
+    public FootScannerViewModel(Vision vision, FirebaseUserManager firebaseUserManager){
         this.vision = vision;
+        this.firebaseUserManager = firebaseUserManager;
     }
 
-    public SingleLiveEvent<String> getCreatedHistoryIdLiveData() {
-        return createdHistoryIdLiveData;
-    }
 
     public MutableLiveData<Boolean> getScanResult() {
         return scanResult;
     }
 
-    public void startScanning(Bitmap bitmap) {
+    public void startScanning(Bitmap bitmap){
         showLoading();
 
-        getCompositeDisposable().clear();
-        getCompositeDisposable().dispose();
 
-<<<<<<< HEAD
-        addDisposable(scanBitmap(bitmap)
-=======
             addDisposable(scanBitmap(bitmap)
->>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<Boolean>() {
@@ -149,18 +135,16 @@ public class FootScannerViewModel extends BaseViewModel {
         });
     }
 
-<<<<<<< HEAD
-
     private void createHistory(boolean wasDetected){
         showLoading();
 
         History history = new History()
-                .setCreatedAt(Calendar.getInstance().getTime())
+                .setCreatedAt(StringUtils.transformDateIntoString(Calendar.getInstance().getTime()))
                 .setResult(wasDetected ? StringUtils.RESULT_DETECTED_TYPE : StringUtils.RESULT_NORMAL_DETECTED_TYPE)
                 .setType(StringUtils.FOOT_SCAN_TYPE)
                 .setEntries(new ArrayList<>());
 
-        addDisposable(FirebaseUserManager.createHistory(FirebaseAuth.getInstance().getUid(), history)
+        addDisposable(firebaseUserManager.createHistory(FirebaseAuth.getInstance().getUid(), history)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<String>() {
@@ -182,15 +166,5 @@ public class FootScannerViewModel extends BaseViewModel {
                     }
                 }));
     }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        compositeDisposable.clear();
-        compositeDisposable.dispose();
-    }
-=======
->>>>>>> 1d86f5d785b5f60403d444c5621d198a09c2764e
-
 
 }

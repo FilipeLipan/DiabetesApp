@@ -9,9 +9,6 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'org.jetbrains.kotlin.android.extensions'
 
 android {
     compileSdkVersion 26
@@ -42,12 +39,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
+            signingConfig signingConfigs.release
         }
     }
 
     buildTypes.each {
-        it.buildConfigField 'String', 'VISION_API_KEY', '"adasdas"'
+        it.buildConfigField 'String', 'VISION_API_KEY', VisionApiKey
     }
 
     dataBinding {
@@ -56,6 +53,12 @@ android {
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
+    }
+
+    configurations {
+        all {
+            exclude module: 'httpclient'
+        }
     }
 }
 
@@ -104,11 +107,10 @@ dependencies {
     // Rx
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     implementation "com.google.firebase:firebase-auth:$firebaseVersion"
     implementation "com.google.android.gms:play-services-auth:$firebaseVersion"
-    implementation "com.google.firebase:firebase-firestore:$firebaseVersion"
+    implementation "com.google.firebase:firebase-database:$firebaseVersion"
 
     implementation "com.romandanylyk:pageindicatorview:1.0.0"
 

@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.utfpr.myapplication.R;
@@ -55,9 +56,9 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
         getViewModel().getScanResult().observe(this, observer -> {
             if (observer != null) {
                 if (observer) {
-                    getDataBind().resultTextview.setText("Ferida detectada");
+                    getDataBind().resultTextview.setText(R.string.wound_detected);
                 } else {
-                    getDataBind().resultTextview.setText("Ferida não detectada");
+                    getDataBind().resultTextview.setText(R.string.wound_not_detected);
                 }
             }
         });
@@ -100,10 +101,9 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
 
 
     private void checkPermissionAndStartPicture() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(
-                    new String[]{android.Manifest.permission.CAMERA},
+            requestPermissions(new String[]{android.Manifest.permission.CAMERA},
                     CAMERA_PERMISSION);
         } else {
             startCameraActivity();
