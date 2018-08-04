@@ -158,7 +158,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
                                     Toast.LENGTH_SHORT).show();
 
                             hideLoading();
-                            getViewModel().loadUser(mAuth.getUid(), new User());
+                            getViewModel().loadUser(mAuth.getUid(), new User(mAuth.getUid(), acct.getDisplayName()));
                         } else {
                             hideLoading();
                             // If sign in fails, display a message to the user.

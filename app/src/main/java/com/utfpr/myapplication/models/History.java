@@ -4,19 +4,29 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class History implements Parcelable {
-    private Date createdAt;
-    private String result;
-    private String type;
-    private ArrayList<HistoryChartEntry> entries;
+    public String createdAt;
+    public String result;
+    public String type;
+    public ArrayList<HistoryChartEntry> entries;
 
-    public Date getCreatedAt() {
+    public History(){
+
+    }
+
+    public History(String createdAt, String result, String type, ArrayList<HistoryChartEntry> entries) {
+        this.createdAt = createdAt;
+        this.result = result;
+        this.type = type;
+        this.entries = entries;
+    }
+
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public History setCreatedAt(Date createdAt) {
+    public History setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -56,18 +66,15 @@ public class History implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(this.createdAt != null ? this.createdAt.getTime() : -1);
+        dest.writeString(this.createdAt);
         dest.writeString(this.result);
         dest.writeString(this.type);
         dest.writeList(this.entries);
     }
 
-    public History() {
-    }
-
     protected History(Parcel in) {
         long tmpCreatedAt = in.readLong();
-        this.createdAt = tmpCreatedAt == -1 ? null : new Date(tmpCreatedAt);
+        this.createdAt = in.readString();
         this.result = in.readString();
         this.type = in.readString();
         this.entries = new ArrayList<HistoryChartEntry>();

@@ -91,8 +91,6 @@ public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExam
 
     @Override
     public void onRefresh() {
-        if(!getDataBind().swipeToRefresh.isRefreshing()) {
-            getViewModel().getAllUserHistory(FirebaseAuth.getInstance().getUid());
-        }
+        getViewModel().getAllUserHistory(FirebaseAuth.getInstance().getUid());
     }
 }

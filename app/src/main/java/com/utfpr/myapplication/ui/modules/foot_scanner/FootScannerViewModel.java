@@ -28,7 +28,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -139,7 +138,7 @@ public class FootScannerViewModel extends BaseViewModel {
         showLoading();
 
         History history = new History()
-                .setCreatedAt(Calendar.getInstance().getTime())
+                .setCreatedAt(StringUtils.transformDateIntoString(Calendar.getInstance().getTime()))
                 .setResult(wasDetected ? StringUtils.RESULT_DETECTED_TYPE : StringUtils.RESULT_NORMAL_DETECTED_TYPE)
                 .setType(StringUtils.FOOT_SCAN_TYPE)
                 .setEntries(new ArrayList<>());

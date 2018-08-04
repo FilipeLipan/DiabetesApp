@@ -110,7 +110,6 @@ dependencies {
 
     implementation "com.google.firebase:firebase-auth:$firebaseVersion"
     implementation "com.google.android.gms:play-services-auth:$firebaseVersion"
-    implementation "com.google.firebase:firebase-firestore:$firebaseVersion"
     implementation "com.google.firebase:firebase-database:$firebaseVersion"
 
     implementation "com.romandanylyk:pageindicatorview:1.0.0"

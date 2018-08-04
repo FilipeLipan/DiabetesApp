@@ -6,7 +6,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.utfpr.myapplication.models.News;
 
 import java.util.ArrayList;
@@ -32,25 +31,25 @@ public class FirebaseNewsManager {
     public Observable<List<News>> getAll(){
         return Observable.create(emmiter -> {
 
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                List<News> list = new ArrayList<>();
-                for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
-                    list.add(messageSnapshot.getValue(News.class));
+                    List<News> list = new ArrayList<>();
+                    for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
+                        list.add(messageSnapshot.getValue(News.class));
+                    }
+                    Log.d(TAG, "success recovering news");
+                    emmiter.onNext(list);
                 }
-                Log.d(TAG, "success recovering news");
-                emmiter.onNext(list);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                emmiter.onError(new Exception(databaseError.getMessage()));
-            }
-        };
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    emmiter.onError(new Exception(databaseError.getMessage()));
+                }
+            };
 
-        firebaseDatabase.getReference().child(NEWS_COLLECTION_NAME).addListenerForSingleValueEvent(eventListener);
+            firebaseDatabase.getReference().child(NEWS_COLLECTION_NAME).addListenerForSingleValueEvent(eventListener);
         });
     }
 

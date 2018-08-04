@@ -14,7 +14,6 @@ import com.utfpr.myapplication.ui.common.BaseViewModel;
 import com.utfpr.myapplication.utils.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -163,21 +162,21 @@ public class MeasuringPressureViewModel extends BaseViewModel {
         return true;
     }
 
-    private void createHistory(){
+    private void createHistory(String date){
 
         ArrayList<HistoryChartEntry> entries = new ArrayList<>();
 
         int size = beatLog.size();
         for (int i = 0; i < size; i++) {
             if(i != 0){
-                entries.add(new HistoryChartEntry().setX((int) (beatLog.get(i) - beatLog.get(i - 1))).setY(i));
+                entries.add(new HistoryChartEntry().setX((Long) (beatLog.get(i) - beatLog.get(i - 1))).setY((long)i));
             }else {
-                entries.add(new HistoryChartEntry().setX(beatLog.get(i).intValue()).setY(i));
+                entries.add(new HistoryChartEntry().setX(beatLog.get(i)).setY((long) i));
             }
         }
 
         History history = new History()
-                .setCreatedAt(Calendar.getInstance().getTime())
+                .setCreatedAt(date)
                 .setResult(isAtRisk() ? StringUtils.RESULT_DETECTED_TYPE : StringUtils.RESULT_NORMAL_DETECTED_TYPE)
                 .setType(StringUtils.HEART_BEAT_TYPE)
                 .setEntries(entries);

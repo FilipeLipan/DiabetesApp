@@ -8,8 +8,6 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.services.vision.v1.Vision;
 import com.google.api.services.vision.v1.VisionRequestInitializer;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.utfpr.myapplication.BuildConfig;
 import com.utfpr.myapplication.data.FirebaseNewsManager;
 import com.utfpr.myapplication.data.FirebaseTutorialManager;
@@ -62,25 +60,12 @@ public class AppModule {
         return new LocalPreferences(context);
     }
 
-    @Reusable
-    @Provides
-    FirebaseFirestore provideFirebase(){
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(true)
-                .build();
-        firebaseFirestore.setFirestoreSettings(settings);
-        return firebaseFirestore;
-    }
 
     @Reusable
     @Provides
     FirebaseDatabase provideFirebaseRealTimeDatabase(){
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(true)
-                .build();
-        firebaseFirestore.setFirestoreSettings(settings);
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
         return FirebaseDatabase.getInstance();
     }
 
@@ -98,7 +83,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    FirebaseUserManager provideFirebaseUserManager(FirebaseFirestore firebaseFirestore, FirebaseDatabase firebaseDatabase, LocalPreferences localPreferences){
-        return new FirebaseUserManager(firebaseFirestore, firebaseDatabase, localPreferences);
+    FirebaseUserManager provideFirebaseUserManager(FirebaseDatabase firebaseDatabase, LocalPreferences localPreferences){
+        return new FirebaseUserManager(firebaseDatabase, localPreferences);
     }
 }
