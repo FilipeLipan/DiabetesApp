@@ -25,6 +25,7 @@
             android:id="@+id/photo_ImageView"
             android:layout_width="@dimen/foot_scanner_image_size"
             android:layout_height="@dimen/foot_scanner_image_size"
+            android:contentDescription="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/guideline_center_horizontal"
             app:layout_constraintStart_toStartOf="parent"

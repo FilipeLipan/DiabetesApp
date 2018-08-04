@@ -93,11 +93,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <!--//TODO create tutorial image-->
                 <ImageButton
                     android:id="@+id/tutorial_imageview"
                     android:layout_width="@dimen/measure_pressure_tutorial_image"
                     android:layout_height="@dimen/measure_pressure_tutorial_image"
-                    android:src="@drawable/tutorial_pressure"
                     android:layout_marginTop="@dimen/screen_title_spacing"
                     android:contentDescription="@string/heart_pressure_tutorial"
                     app:layout_constraintBottom_toBottomOf="parent"

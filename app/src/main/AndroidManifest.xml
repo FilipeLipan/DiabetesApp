@@ -39,7 +39,7 @@
             android:theme="@style/FullScreen" />
         <activity
             android:name=".ui.modules.history.measuring_pressure_detail.MeasurePressureDetailActivity"
-            android:label="@string/measure_pressure_detail"></activity>
+            android:label="@string/measure_pressure_detail"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"

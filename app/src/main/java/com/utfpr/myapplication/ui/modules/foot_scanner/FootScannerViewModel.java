@@ -80,7 +80,7 @@ public class FootScannerViewModel extends BaseViewModel {
 
                     @Override
                     public void onComplete() {
-                        //ignore
+
                     }
                 }));
     }
