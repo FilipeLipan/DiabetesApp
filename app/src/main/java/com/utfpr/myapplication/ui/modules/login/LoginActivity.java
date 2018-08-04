@@ -172,11 +172,11 @@ public class LoginActivity extends BaseActivity<LoginViewModel ,ActivityLoginBin
 
     @Override
     public void showLoading() {
-        getDataBind().loadingView.setVisibility(View.VISIBLE);
+        getDataBind().loadingView.loadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        getDataBind().loadingView.setVisibility(View.GONE);
+        getDataBind().loadingView.loadingView.setVisibility(View.GONE);
     }
 }

@@ -76,7 +76,7 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
     private void setUpClickListeners() {
         getDataBind().clickToTakePictureInclude.setOnClickListener(v -> checkPermissionAndStartPicture());
         getDataBind().takePhotoButton.setOnClickListener(v -> checkPermissionAndStartPicture());
-        getDataBind().loadingInclude.getRootView().setOnClickListener(view -> {
+        getDataBind().loadingInclude.loadingView.setOnClickListener(view -> {
         });
     }
 
@@ -128,11 +128,11 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
 
     @Override
     public void showLoading() {
-        getDataBind().loadingInclude.setVisibility(View.VISIBLE);
+        getDataBind().loadingInclude.loadingView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        getDataBind().loadingInclude.setVisibility(View.INVISIBLE);
+        getDataBind().loadingInclude.loadingView.setVisibility(View.GONE);
     }
 }

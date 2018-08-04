@@ -47,6 +47,16 @@ public class MeasuringPressureFragment extends BaseFragment<MeasuringPressureVie
         observeLiveData();
     }
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
     private void initCamera(){
         if(getContext() != null) {
             PowerManager pm = (PowerManager) getContext().getSystemService(Context.POWER_SERVICE);

@@ -57,6 +57,16 @@ public class TutorialItemFragment extends BaseFragment<TutorialItemViewModel, Fr
     }
 
     @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
     public TutorialItemViewModel getViewModel() {
         return ViewModelProviders.of(this, viewModelFactory).get(TutorialItemViewModel.class);
     }

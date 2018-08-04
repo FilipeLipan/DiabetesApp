@@ -64,13 +64,11 @@ public class HistoryFragment extends BaseFragment<HistoryViewModel, FragmentExam
 
     @Override
     public void showLoading() {
-        super.showLoading();
         getDataBind().swipeToRefresh.setRefreshing(true);
     }
 
     @Override
     public void hideLoading() {
-        super.hideLoading();
         getDataBind().swipeToRefresh.setRefreshing(false);
     }
 

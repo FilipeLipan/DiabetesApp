@@ -79,11 +79,7 @@ public abstract class BaseFragment<V extends BaseViewModel, B extends ViewDataBi
     }
 
 
-    public void showLoading(){
 
-    }
-
-    public void hideLoading(){
-
-    }
+    public abstract void showLoading();
+    public abstract void hideLoading();
 }

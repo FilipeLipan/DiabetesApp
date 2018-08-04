@@ -143,7 +143,6 @@ public class FootScannerViewModel extends BaseViewModel {
 
     private void createHistory(boolean wasDetected){
         localPreferences.saveLastExamDate(Calendar.getInstance().getTimeInMillis());
-        showLoading();
 
         History history = new History()
                 .setCreatedAt(StringUtils.transformDateIntoString(Calendar.getInstance().getTime()))
