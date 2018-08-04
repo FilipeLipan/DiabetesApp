@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.utfpr.myapplication.R;
 import com.utfpr.myapplication.databinding.FragmentFootScannerBinding;
+import com.utfpr.myapplication.services.SaveHistoryService;
 import com.utfpr.myapplication.ui.common.BaseFragment;
 import com.utfpr.myapplication.utils.ImagePicker;
 
@@ -63,6 +64,13 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
             }
         });
 
+        getViewModel().getCreatedHistoryLiveData().observe(this, history -> {
+            if(history != null){
+                Intent intent = new Intent(getContext(), SaveHistoryService.class);
+                intent.putExtra(SaveHistoryService.KEY_HISTORY, history);
+                getContext().startService(intent);
+            }
+        });
     }
 
     private void setUpClickListeners() {
@@ -125,6 +133,6 @@ public class FootScannerFragment extends BaseFragment<FootScannerViewModel, Frag
 
     @Override
     public void hideLoading() {
-        getDataBind().loadingInclude.setVisibility(View.GONE);
+        getDataBind().loadingInclude.setVisibility(View.INVISIBLE);
     }
 }

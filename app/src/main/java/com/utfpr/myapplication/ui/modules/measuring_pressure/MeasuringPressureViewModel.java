@@ -14,6 +14,7 @@ import com.utfpr.myapplication.ui.common.BaseViewModel;
 import com.utfpr.myapplication.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -112,6 +113,7 @@ public class MeasuringPressureViewModel extends BaseViewModel {
             Log.d(TAG, "BEAT!! beats="+beats);
             if(beatLog.size() >= BEAT_LOG_MAXIMUM_ARRAY_SIZE){
                 isProcessingMutableLivedata.setValue(false);
+                createHistory(StringUtils.transformDateIntoString(Calendar.getInstance().getTime()));
             }
         }
 

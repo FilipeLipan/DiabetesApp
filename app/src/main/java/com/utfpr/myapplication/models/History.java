@@ -73,7 +73,6 @@ public class History implements Parcelable {
     }
 
     protected History(Parcel in) {
-        long tmpCreatedAt = in.readLong();
         this.createdAt = in.readString();
         this.result = in.readString();
         this.type = in.readString();

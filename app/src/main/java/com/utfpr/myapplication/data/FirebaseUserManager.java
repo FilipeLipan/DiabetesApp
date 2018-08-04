@@ -28,7 +28,7 @@ public class FirebaseUserManager {
 
     private static final String TAG = FirebaseUserManager.class.getSimpleName();
     private static final String USER_COLLECTION_NAME = "user";
-    private static final String HISTORY_COLLECTION_NAME = "history";
+    public static final String HISTORY_COLLECTION_NAME = "history";
     private final FirebaseDatabase firebaseDatabase;
     private final LocalPreferences localPreferences;
 
@@ -61,9 +61,9 @@ public class FirebaseUserManager {
         });
     }
 
-    public Completable createUser(String userId, User user){
+    public static Completable createUser(String userId, User user){
         return Completable.create(emmiter -> {
-            firebaseDatabase.getReference().child(USER_COLLECTION_NAME).child(userId).setValue(user)
+            FirebaseDatabase.getInstance().getReference().child(USER_COLLECTION_NAME).child(userId).setValue(user)
             .addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

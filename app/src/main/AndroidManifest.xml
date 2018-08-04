@@ -54,6 +54,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/reminder_widget_info" />
         </receiver>
+        <service android:name=".services.SaveHistoryService" />
     </application>
 
 </manifest>
